@@ -7,13 +7,13 @@ function Checker(props)
 
     const [isONBoard, setIsOnBoard] = useState(true);
     //setIsOnBoard((isONBoard) => isONBoard = false);
-    setIsOnBoard(props.onBoard);
+    //setIsOnBoard(props.onBoard);
 
     let image;
 
     if (props.isRed)
     {
-        image = redChecker;
+        image = redChecker; 
     }
     else
     {

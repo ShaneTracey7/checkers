@@ -5,7 +5,7 @@ import styles from '../styles.css';
 
 function Space(props)
 {
-const [isEmpty, setIsEmpty] = useState(false);
+const [isEmpty, setIsEmpty] = useState(true);
 const [color, setColor] = useState('black');
 const [isHover, setIsHover] = useState(false);
 

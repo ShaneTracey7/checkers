@@ -18,13 +18,13 @@ function Board()
             <div className='container'>
                 <Space isWhite={false}/>
                 <div className='overlay'>
-                    <Checker onBoard={true} isRed={true}/>
+                    <Checker onBoard={true} isRed={true}/> 
                 </div>
             </div>
             <div className='container'>
                 <Space isWhite={true}/>
                 <div className='overlay'>
-                    <Checker onBoard={false}isRed={true}/>
+                    {/* <Checker onBoard={false}isRed={true}/> */}
                 </div>
             </div>
             <div className='container'>
@@ -36,7 +36,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={true}/>
                 <div className='overlay'>
-                    <Checker onBoard={false} isRed={true}/>
+                   {/* <Checker onBoard={false} isRed={true}/> */}
                 </div>
             </div>
             <div className='container'>
@@ -48,7 +48,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={true}/>
                 <div className='overlay'>
-                    <Checker onBoard={false} isRed={true}/>
+                  {/*  <Checker onBoard={false} isRed={true}/> */}
                 </div>
             </div>
             <div className='container'>
@@ -60,7 +60,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={true}/>
                 <div className='overlay'>
-                    <Checker onBoard={false} isRed={true}/>
+                  {/*  <Checker onBoard={false} isRed={true}/> */}
                 </div>
             </div>
         </div>
