@@ -6,9 +6,34 @@ function Checker(props)
 {
 
     const [isONBoard, setIsOnBoard] = useState(true);
+    const [isSelected, setIsSelected] = useState(false);
     //setIsOnBoard((isONBoard) => isONBoard = false);
     //setIsOnBoard(props.onBoard);
-
+    function handleClick()
+    {
+        if (isSelected)
+        {
+            if (props.isSelectedParentV)
+            {
+                props.isSelectedParentF(false);
+                setIsSelected(false);
+            }
+            
+        }
+        else
+        {
+            if (props.isSelectedParentV)
+            {
+                //do nothing
+            }
+            else
+            {
+                props.isSelectedParentF(true);
+                setIsSelected(true); 
+            }
+        }
+        
+    }
     let image;
 
     if (props.isRed)
@@ -20,10 +45,30 @@ function Checker(props)
         image = blackChecker;
     }
 
+    let borderStyle;
+
+    const b1 = {
+        border: "2px solid blue",
+        borderRadius: "25px"
+      };
+
+      const b2 = {
+        border: "0px"
+      };
+
+    if (isSelected)
+    {
+        borderStyle = b1;
+    }
+    else
+    {
+        borderStyle = b2;
+    }
+
     if (isONBoard)
     {
     return (
-            <img src={image} height={50} width={50}/>
+            <img style={borderStyle} onClick={handleClick}src={image} height={50} width={50}/>
     )
     }
 

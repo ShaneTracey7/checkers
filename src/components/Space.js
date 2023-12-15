@@ -9,26 +9,22 @@ const [isEmpty, setIsEmpty] = useState(true);
 const [color, setColor] = useState('black');
 const [isHover, setIsHover] = useState(false);
 
-let bg = 'black';
-
-let image;
-
-function handleHover(e)
+/*function handleClick()
 {
-    e.target.style.backgroundColor = 'black';
-    /*
-    if (e.target.style.backgroundColor ==="#000000")
+    if (isEmpty)
     {
-        setColor("#0000ff");
-        counter+= 1;
+        if 
     }
     else
     {
-        setColor("#000000");
-        counter+= 2;
-    }*/
-    //highlight space
-}
+        //DON NOTHING
+    }
+
+}*/
+
+let bg = 'black';
+
+let image;
 
 if (props.isWhite)
 {
@@ -57,10 +53,10 @@ else
     }
     
 }
-
+//onClick={handleClick}
 return (
 <div style={styles}>
-<img style={{border:bg}} onMouseEnter={()=> {if (isEmpty) { setIsHover(true)} }} onMouseLeave={()=> {if (isEmpty) { setIsHover(false)} }} src={image} height= {50} width={50} />
+<img style={{border:bg}}  onMouseEnter={()=> {if (isEmpty) { setIsHover(true)} }} onMouseLeave={()=> {if (isEmpty) { setIsHover(false)} }} src={image} height= {50} width={50} />
 </div>
 )
 

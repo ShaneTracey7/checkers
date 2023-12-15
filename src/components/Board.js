@@ -1,16 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Space from './Space.js';
-import cat from '../pics/red-checker.png';
 import Checker from './Checker.js';
 import styles from '../styles.css';
 
 function Board()
 {
 
-
-    function highlightSpace(e) {
-        e.target.style.background = 'red';
-      }
+    const [isCheckerSelected, setIsCheckerSelected] = useState(false);
 
     return (
         <div style={styles} id='board'>
@@ -18,7 +14,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={false}/>
                 <div className='overlay'>
-                    <Checker onBoard={true} isRed={true}/> 
+                    <Checker isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} onBoard={true} isRed={true}/> 
                 </div>
             </div>
             <div className='container'>
@@ -30,7 +26,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={false}/>
                 <div className='overlay'>
-                    <Checker onBoard={true} isRed={true}/>
+                    <Checker isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} onBoard={true} isRed={true}/>
                 </div>
             </div>
             <div className='container'>
@@ -42,7 +38,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={false}/>
                 <div className='overlay'>
-                    <Checker onBoard={true} isRed={true}/>
+                    <Checker  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} onBoard={true} isRed={true}/>
                 </div>
             </div>
             <div className='container'>
@@ -54,7 +50,7 @@ function Board()
             <div className='container'>
                 <Space isWhite={false}/>
                 <div className='overlay'>
-                    <Checker onBoard={true} isRed={true}/>
+                    <Checker isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} onBoard={true} isRed={true}/>
                 </div>
             </div>
             <div className='container'>
