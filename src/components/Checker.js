@@ -7,10 +7,13 @@ function Checker(props)
 
     const [isONBoard, setIsOnBoard] = useState(true);
     const [isSelected, setIsSelected] = useState(false);
+    //const [coordinates, setCoordinates] = useState('');
+
     //setIsOnBoard((isONBoard) => isONBoard = false);
     //setIsOnBoard(props.onBoard);
     function handleClick()
     {
+
         if (isSelected)
         {
             if (props.isSelectedParentV)
@@ -30,6 +33,7 @@ function Checker(props)
             {
                 props.isSelectedParentF(true);
                 setIsSelected(true); 
+                props.checkerData.setCoordinates(props.coordinates);
             }
         }
         
@@ -48,12 +52,13 @@ function Checker(props)
     let borderStyle;
 
     const b1 = {
-        border: "2px solid blue",
-        borderRadius: "25px"
+        border: "3px solid blue",
+        borderRadius: "30px"
       };
 
       const b2 = {
-        border: "0px"
+        border: "3px solid white",
+        borderRadius: "30px"
       };
 
     if (isSelected)
