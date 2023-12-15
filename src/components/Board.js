@@ -8,7 +8,8 @@ function Board()
 
     const [isCheckerSelected, setIsCheckerSelected] = useState(false);
     const [checkerCoordinates, setCheckerCoordinates] = useState();
-    const [isRed, setIsRed] = useState();
+    const [lastCheckerCoordinates, setLastCheckerCoordinates] = useState();
+    const [isRed, setIsRed] = useState(false);
     const [selectedCheckerData, setSelectedCheckerData] = useState([]);
 
     const intialCheckerData = [ 
@@ -42,8 +43,11 @@ function Board()
     const checkerData = {
         coordinates: checkerCoordinates, 
         setCoordinates: setCheckerCoordinates, 
+        lastCoordinates: lastCheckerCoordinates,
+        setLastCoordinates: setLastCheckerCoordinates,
         color: isRed, 
         setColor: setIsRed
+
     };
 
 
@@ -51,7 +55,8 @@ function Board()
     return (
         <div>
             <p>{checkerData.coordinates}</p>
-            <p>{checkerData.color}</p>
+            <p>{String(checkerData.color)}</p>
+            <p>Last {checkerData.lastCoordinates}</p>
         <div style={styles} id='board'>    
         <div className='row'>
                  <Space checkerData ={checkerData} coordinates = {11}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
@@ -97,40 +102,58 @@ function Board()
          
         </div>
         <div className='row'>
-                <Space checkerData ={[]} coordinates = '51' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={[]} coordinates = '52' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '53' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={[]} coordinates = '54' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '55' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={[]} coordinates = '56' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '57' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={[]} coordinates = '58' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                
+                <Space checkerData ={checkerData} coordinates = {51}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {52}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {53}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {54}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {55}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {56}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {57}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {58}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+               
         </div>
         <div className='row'>
-                 <Space checkerData ={intialCheckerData[15]} coordinates = '61' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '62' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[12]} coordinates = '63' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '64' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[13]} coordinates = '65' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '66' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[14]} coordinates = '67' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '68' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                
+                <Space checkerData ={checkerData} coordinates = {61}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>       
+                <Space checkerData ={checkerData} coordinates = {62}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {63}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {64}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {65}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {66}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {67}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {68}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+         
         </div>
         <div className='row'>
 
-                <Space checkerData ={[]} coordinates = '71' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[16]} coordinates = '72' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '73' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[17]} coordinates = '74' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '75' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[18]} coordinates = '76' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '77' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[19]} coordinates = '78' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                
+                <Space checkerData ={checkerData} coordinates = {71}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {72}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {73}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {74}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {75}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {76}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {77}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {78}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+               
         </div>
         <div className='row'>
+                <Space checkerData ={checkerData} coordinates = {81}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>       
+                <Space checkerData ={checkerData} coordinates = {82}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {83}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {84}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {85}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {86}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+                <Space checkerData ={checkerData} coordinates = {87}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
+                <Space checkerData ={checkerData} coordinates = {88}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
+         
+        </div>
+        
+        </div>
+
+        </div>
+    );
+}
+
+/*
                  <Space checkerData ={intialCheckerData[23]} coordinates = '81' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
                 <Space checkerData ={[]} coordinates = '82' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
                 <Space checkerData ={intialCheckerData[20]} coordinates = '83' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
@@ -139,13 +162,6 @@ function Board()
                 <Space checkerData ={[]} coordinates = '86' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
                 <Space checkerData ={intialCheckerData[22]} coordinates = '87' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
                 <Space checkerData ={[]} coordinates = '88' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                
-        </div>
-        
-        </div>
-
-        </div>
-    );
-}
+                */
 
 export default Board;

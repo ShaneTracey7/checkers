@@ -6,40 +6,71 @@ import Checker from './Checker';
 
 function Space(props)
 {
-//const [isEmpty, setIsEmpty] = useState(true);
+
 const [isHover, setIsHover] = useState(false);
 const [isRed, setIsRed] = useState(true);
 const coordinates = props.coordinates; //11 TO 88 (first-digit -> Y Axis, second-digit X Axis)
 //const [checkerData, setCheckerData] = useState([]);
+const [isEmpty, setIsEmpty] = useState(true);
 
-let isEmpty = true;
 
+function handleLoad()
+{
+    if (coordinates == 11 || coordinates == 13 || coordinates == 15 || coordinates == 17 || coordinates == 22 || coordinates == 24 || coordinates == 26 || coordinates == 28 || coordinates == 31 || coordinates == 33 || coordinates == 35 || coordinates == 37)
+    {
+        setIsEmpty(false);
+        setIsRed(true);
+    } 
+    if (coordinates == 62 || coordinates == 64 || coordinates == 66 || coordinates == 68 || coordinates == 71 || coordinates == 73 || coordinates == 75 || coordinates == 77 || coordinates == 82 || coordinates == 84 || coordinates == 86 || coordinates == 88)
+    {
+        setIsEmpty(false);
+        setIsRed(false);
+    }   
+}
 
+//doesnt work atm
+function handleChange()
+{
+if (props.checkerData.lastCoordinates == coordinates)
+{
+    setIsEmpty(true);
+}
+}
 //function that recieves data of where checker is and hides it from previous location, and shows it in current this space, if fulfill conditions
 function handleClick()
 {
-
-    if (true)//a valid move
-    {
-    isEmpty = false;
-
+    
+    if (isEmpty && props.isWhite) 
+    { 
+        let coords = getCoordinateOptions();
+        if(coords[0] == coordinates || coords[1] == coordinates)
+        {
+        // to do
+        setIsEmpty(false);
+        setIsHover(false);
+        setIsRed(props.checkerData.color);
+        props.checkerData.setLastCoordinates(props.checkerData.coordinates);
+        props.checkerData.setCoordinates(coordinates);
+        }
     }
 }
 
 
 let checkerStr = "";
+/*
 if (coordinates == 11 || coordinates == 13 || coordinates == 15 || coordinates == 17)
 {
-   // setIsEmpty(!isEmpty); //toggle
+   setIsEmpty(false); //toggle
    //props.checkerData.setColor(true);
    //props.checkerData.setCoordinates(coordinates);
-   isEmpty = false;
-}
+   //isEmpty = false;
+}*/
 
 function getCoordinateOptions()
 {
-    let yCoord = (coordinates - (coordinates % 10))/ 10
-    let xCoord = coordinates % 10;
+    const c = props.checkerData.coordinates;
+    let yCoord = (c - (c % 10))/ 10;
+    let xCoord = c % 10;
     let xNum1,xNum2, yNum;
 
     if (props.checkerData.color) //red
@@ -51,7 +82,7 @@ function getCoordinateOptions()
         }
         else
         {
-            yNum = (yCoord + 1)*10
+            yNum = (yCoord + 1)*10;
         }
     }
     else //black
@@ -63,7 +94,7 @@ function getCoordinateOptions()
         }
         else
         {
-            yNum = (yCoord - 1)*10
+            yNum = (yCoord - 1)*10;
         }
     }
     
@@ -90,7 +121,7 @@ function handleMouseEnter()
     if (isEmpty && props.isWhite) 
     { 
         let coords = getCoordinateOptions();
-        if(coords[0] == coordinates ||coords[1] == coordinates )
+        if(coords[0] == coordinates || coords[1] == coordinates)
         {
         setIsHover(true);
         }
@@ -102,26 +133,14 @@ function handleMouseLeave()
     if (isEmpty && props.isWhite)  
     { 
         let coords = getCoordinateOptions();
-        if(coords[0] == coordinates ||coords[1] == coordinates )
+        if(coords[0] == coordinates ||coords[1] == coordinates)
         {
         setIsHover(false);
         }
     }
 }
-/*function handleClick()
-{
-    if (isEmpty)
-    {
-        if 
-    }
-    else
-    {
-        //DON NOTHING
-    }
 
-}*/
-
-let bg = 'black';
+let bg = '';
 
 let image;
 
@@ -135,7 +154,7 @@ else
     image = blackSpace;
     bg = '3px solid black';
 }
-if (isHover && !props.isSelectedParentV)
+if (isHover && props.isSelectedParentV)
 {
     //setColor('blue');
     bg = '3px solid blue';
@@ -165,10 +184,9 @@ else
 //onClick={handleClick}
 return (
 <div style={styles} className='container'>
-    <img style={{border:bg}}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
+    <img style={{border:bg}} onChange={handleChange} onLoad={handleLoad} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
     <div className='overlay'>
         {checkerStr}
-       <p>{props.checkerData['coordinates']}</p> 
         </div>
 </div>
 )

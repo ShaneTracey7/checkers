@@ -34,6 +34,7 @@ function Checker(props)
                 props.isSelectedParentF(true);
                 setIsSelected(true); 
                 props.checkerData.setCoordinates(props.coordinates);
+                props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
             }
         }
         
