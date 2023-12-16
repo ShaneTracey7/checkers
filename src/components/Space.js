@@ -29,22 +29,11 @@ function handleLoad()
 {
     if (coordinates == 11 || coordinates == 13 || coordinates == 15 || coordinates == 17 || coordinates == 22 || coordinates == 24 || coordinates == 26 || coordinates == 28 || coordinates == 31 || coordinates == 33 || coordinates == 35 || coordinates == 37)
     {
-        /*
-      let temp = props.checkerData.show;
-       temp[coordToIndex(coordinates)] = false;
-        props.checkerData.setShow(temp);
-        */
-        //setIsEmpty(false);
        setIsRed(true);
        
     } 
     if (coordinates == 62 || coordinates == 64 || coordinates == 66 || coordinates == 68 || coordinates == 71 || coordinates == 73 || coordinates == 75 || coordinates == 77 || coordinates == 82 || coordinates == 84 || coordinates == 86 || coordinates == 88)
     {
-        //setIsEmpty(false);
-       /* let temp = props.checkerData.show;
-       temp[coordToIndex(coordinates)] = false;
-        props.checkerData.setShow(temp);
-        */
         setIsRed(false);
     }   
 }
@@ -94,15 +83,8 @@ function handleClick()
 
 
 let checkerStr = "";
-/*
-if (coordinates == 11 || coordinates == 13 || coordinates == 15 || coordinates == 17)
-{
-   setIsEmpty(false); //toggle
-   //props.checkerData.setColor(true);
-   //props.checkerData.setCoordinates(coordinates);
-   //isEmpty = false;
-}*/
 
+//consider if a checker of the opposite colour is occupying one of the values.
 function getCoordinateOptions()
 {
     const c = props.checkerData.coordinates;
