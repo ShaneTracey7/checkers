@@ -6,7 +6,7 @@ function Checker(props)
 {
 
     const [isONBoard, setIsOnBoard] = useState(true);
-    const [isSelected, setIsSelected] = useState(false);
+    //const [isSelected, setIsSelected] = useState(false);
     //const [coordinates, setCoordinates] = useState('');
 
     //setIsOnBoard((isONBoard) => isONBoard = false);
@@ -14,12 +14,12 @@ function Checker(props)
     function handleClick()
     {
 
-        if (isSelected)
+        if (props.isSelectedV)
         {
             if (props.isSelectedParentV)
             {
                 props.isSelectedParentF(false);
-                setIsSelected(false);
+                props.isSelectedF(false);
             }
             
         }
@@ -32,7 +32,7 @@ function Checker(props)
             else
             {
                 props.isSelectedParentF(true);
-                setIsSelected(true); 
+                props.isSelectedF(true); 
                 props.checkerData.setCoordinates(props.coordinates);
                 props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
             }
@@ -62,7 +62,7 @@ function Checker(props)
         borderRadius: "30px"
       };
 
-    if (isSelected)
+    if (props.isSelectedV)
     {
         borderStyle = b1;
     }

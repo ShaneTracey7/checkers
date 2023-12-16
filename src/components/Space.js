@@ -10,46 +10,83 @@ function Space(props)
 const [isHover, setIsHover] = useState(false);
 const [isRed, setIsRed] = useState(true);
 const coordinates = props.coordinates; //11 TO 88 (first-digit -> Y Axis, second-digit X Axis)
+const [isCheckerSelected, setIsCheckerSelected] = useState(false);
 //const [checkerData, setCheckerData] = useState([]);
-const [isEmpty, setIsEmpty] = useState(true);
-
+//const [isEmpty, setIsEmpty] = useState(true);
+/*
+useEffect(
+    () => {
+      const subscription = props.source.subscribe();
+      return () => {
+        subscription.unsubscribe();
+      };
+    },
+    [props.checkerData],
+  );
+*/
 
 function handleLoad()
 {
     if (coordinates == 11 || coordinates == 13 || coordinates == 15 || coordinates == 17 || coordinates == 22 || coordinates == 24 || coordinates == 26 || coordinates == 28 || coordinates == 31 || coordinates == 33 || coordinates == 35 || coordinates == 37)
     {
-        setIsEmpty(false);
-        setIsRed(true);
+        /*
+      let temp = props.checkerData.show;
+       temp[coordToIndex(coordinates)] = false;
+        props.checkerData.setShow(temp);
+        */
+        //setIsEmpty(false);
+       setIsRed(true);
+       
     } 
     if (coordinates == 62 || coordinates == 64 || coordinates == 66 || coordinates == 68 || coordinates == 71 || coordinates == 73 || coordinates == 75 || coordinates == 77 || coordinates == 82 || coordinates == 84 || coordinates == 86 || coordinates == 88)
     {
-        setIsEmpty(false);
+        //setIsEmpty(false);
+       /* let temp = props.checkerData.show;
+       temp[coordToIndex(coordinates)] = false;
+        props.checkerData.setShow(temp);
+        */
         setIsRed(false);
     }   
 }
 
+function coordToIndex(coord)
+{
+    let index = (coord -11) - 2*(((coord - (coord % 10))/10) - 1);
+    return index;
+}
+
 //doesnt work atm
-function handleChange()
+/*
+function doThis()
 {
 if (props.checkerData.lastCoordinates == coordinates)
 {
     setIsEmpty(true);
 }
 }
+*/
 //function that recieves data of where checker is and hides it from previous location, and shows it in current this space, if fulfill conditions
 function handleClick()
 {
-    
-    if (isEmpty && props.isWhite) 
+    if (props.isEmpty && props.isWhite && props.isSelectedParentV) 
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates || coords[1] == coordinates)
         {
         // to do
-        setIsEmpty(false);
+        //setIsEmpty(false);
+        let temp = props.checkerData.show;
+        //change show new location checker got moved to
+        temp[coordToIndex(coordinates)] = false;
+        //remove old location where checker moved from
+        temp[coordToIndex(props.checkerData.coordinates)] = true;
+        //set array with updated info
+        props.checkerData.setShow(temp);
+
         setIsHover(false);
         setIsRed(props.checkerData.color);
-        props.checkerData.setLastCoordinates(props.checkerData.coordinates);
+        setIsCheckerSelected(true);
+        //props.checkerData.setLastCoordinates(props.checkerData.coordinates);
         props.checkerData.setCoordinates(coordinates);
         }
     }
@@ -118,7 +155,7 @@ function getCoordinateOptions()
 }
 function handleMouseEnter()
 {
-    if (isEmpty && props.isWhite) 
+    if (props.isEmpty && props.isWhite) 
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates || coords[1] == coordinates)
@@ -130,7 +167,7 @@ function handleMouseEnter()
 
 function handleMouseLeave()
 {
-    if (isEmpty && props.isWhite)  
+    if (props.isEmpty && props.isWhite)  
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates ||coords[1] == coordinates)
@@ -172,19 +209,19 @@ else
     
 }
 //let checkerStr;
-if (isEmpty)
+if (props.isEmpty)
 {
     //checkerStr = "";
 }
 else
 {
-    checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isRed={isRed}/>;
+    checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected}isRed={isRed}/>;
 }
 
 //onClick={handleClick}
 return (
 <div style={styles} className='container'>
-    <img style={{border:bg}} onChange={handleChange} onLoad={handleLoad} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
+    <img style={{border:bg}} onLoad={handleLoad} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
     <div className='overlay'>
         {checkerStr}
         </div>
