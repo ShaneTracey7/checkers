@@ -7,10 +7,10 @@ import Checker from './Checker';
 function Space(props)
 {
 
-const [isHover, setIsHover] = useState(false);
-const [isRed, setIsRed] = useState(true);
+const [isHover, setIsHover] = useState(false); //boolean variable: true if player can move checker to space that is hovered over, false if player can't
+const [isRed, setIsRed] = useState(true); //boolean variable: true if  checker is red, false if checker is black
 const coordinates = props.coordinates; //11 TO 88 (first-digit -> Y Axis, second-digit X Axis)
-const [isCheckerSelected, setIsCheckerSelected] = useState(false);
+const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is the checker on the SPACE selected
 //const [checkerData, setCheckerData] = useState([]);
 //const [isEmpty, setIsEmpty] = useState(true);
 /*
@@ -31,11 +31,11 @@ function handleLoad()
     {
        setIsRed(true);
        
-    } 
+    }
     if (coordinates == 62 || coordinates == 64 || coordinates == 66 || coordinates == 68 || coordinates == 71 || coordinates == 73 || coordinates == 75 || coordinates == 77 || coordinates == 82 || coordinates == 84 || coordinates == 86 || coordinates == 88)
     {
         setIsRed(false);
-    }   
+    }
 }
 
 function coordToIndex(coord)
@@ -44,43 +44,42 @@ function coordToIndex(coord)
     return index;
 }
 
-//doesnt work atm
-/*
-function doThis()
-{
-if (props.checkerData.lastCoordinates == coordinates)
-{
-    setIsEmpty(true);
-}
-}
-*/
+
 //function that recieves data of where checker is and hides it from previous location, and shows it in current this space, if fulfill conditions
 function handleClick()
 {
-    if (props.isEmpty && props.isWhite && props.isSelectedParentV) 
+    if (props.isEmpty && props.isWhite && props.isSelectedParentV /*&& isRed == props.checkerData.turn*/) 
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates || coords[1] == coordinates)
         {
-        // to do
-        //setIsEmpty(false);
-        let temp = props.checkerData.show;
-        //change show new location checker got moved to
-        temp[coordToIndex(coordinates)] = false;
-        //remove old location where checker moved from
-        temp[coordToIndex(props.checkerData.coordinates)] = true;
-        //set array with updated info
-        props.checkerData.setShow(temp);
+            //setIsEmpty(false);
+            let temp = props.checkerData.show;
+            //change show new location checker got moved to
+            temp[coordToIndex(coordinates)] = false;
+            //remove old location where checker moved from
+            temp[coordToIndex(props.checkerData.coordinates)] = true;
+            //set array with updated info
+            props.checkerData.setShow(temp);
 
-        setIsHover(false);
-        setIsRed(props.checkerData.color);
-        setIsCheckerSelected(true);
-        //props.checkerData.setLastCoordinates(props.checkerData.coordinates);
-        props.checkerData.setCoordinates(coordinates);
+            //switches turn
+            props.checkerData.setTurn(!props.checkerData.turn);
+
+            setIsHover(false);
+
+            setIsRed(props.checkerData.color); //set checker color
+            setIsCheckerSelected(false);  //checker is not selected on SPACE
+            props.isSelectedParentF(false); //checker is not selected on BOARD
+            props.checkerData.setCoordinates(coordinates); //setting checker coordinates
         }
     }
 }
 
+
+function overTakeChecker()
+{
+    //get space inbetween
+}
 
 let checkerStr = "";
 
@@ -137,7 +136,7 @@ function getCoordinateOptions()
 }
 function handleMouseEnter()
 {
-    if (props.isEmpty && props.isWhite) 
+    if (props.isEmpty && props.isWhite /*&& isRed == props.checkerData.turn*/) 
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates || coords[1] == coordinates)
@@ -149,7 +148,7 @@ function handleMouseEnter()
 
 function handleMouseLeave()
 {
-    if (props.isEmpty && props.isWhite)  
+    if (props.isEmpty && props.isWhite /*&& isRed == props.checkerData.turn*/)  
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates ||coords[1] == coordinates)

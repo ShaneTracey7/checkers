@@ -5,34 +5,35 @@ import styles from '../styles.css';
 
 function Board()
 {
-
-    const [isCheckerSelected, setIsCheckerSelected] = useState(false);
+        
+    const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is there any checker on the BOARD selected
     const [checkerCoordinates, setCheckerCoordinates] = useState();
     const [lastCheckerCoordinates, setLastCheckerCoordinates] = useState();
     const [isRed, setIsRed] = useState(false);
     const [selectedCheckerData, setSelectedCheckerData] = useState([]);
+    const [isRedTurn, setIsRedTurn] = useState(true);
 
+
+    //a matrix to show whether or not a space is empty
     const intialCheckerData = [
-       false,true,false,true,false,true,false,true,
-       true,false,true,false,true,false,true,false,
       false,true,false,true,false,true,false,true,
-        //true,true,true,true,true,true,true,true,
-        //true,true,true,true,true,true,true,true,
-        //true,true,true,true,true,true,true,true,
+      true,false,true,false,true,false,true,false,
+      false,true,false,true,false,true,false,true,
+       // true,true,true,true,true,true,true,true,
+       // true,true,true,true,true,true,true,true,
+       // true,true,true,true,true,true,true,true,
         true,true,true,true,true,true,true,true,
         true,true,true,true,true,true,true,true,
        // true,true,true,true,true,true,true,true,
-       // true,true,true,true,true,true,true,true,
-       // true,true,true,true,true,true,true,true
+      //  true,true,true,true,true,true,true,true,
+      // true,true,true,true,true,true,true,true
         true,false,true,false,true,false,true,false,
         false,true,false,true,false,true,false,true,
-        true,false,true,false,true,false,true,false
+       true,false,true,false,true,false,true,false
         
     ];
 
     const [allCheckers, setAllCheckers] = useState(intialCheckerData);
-
-
 
     
 
@@ -72,17 +73,43 @@ function Board()
         lastCoordinates: lastCheckerCoordinates,
         setLastCoordinates: setLastCheckerCoordinates,
         color: isRed, 
-        setColor: setIsRed
+        setColor: setIsRed,
+        //may move this into different state later
+        turn: isRedTurn,
+        setTurn: setIsRedTurn
 
     };
 
+function toDisplay()
+{
+        let str = "";
 
+        for (let i = 0; i < allCheckers.length - 1; i++)
+        {
+                if (allCheckers[i])
+                {
+                        str = str + " _ |";
+                }
+                else
+                {
+                        str = str + " 0 |";   
+                }
+
+                if (i % 8 == 0)
+                {
+                str = str + '\n';
+                }
+        }
+
+        return str;
+}
 
     return (
         <div>
+                 <small>{toDisplay()}</small>
             <p>{checkerData.coordinates}</p>
-            <p>{String(checkerData.color)}</p>
-            <p>Last {checkerData.lastCoordinates}</p>
+            <p>{checkerData.color ? 'Red':'Black'}</p>
+            <h1>{isRedTurn ? 'Red':'Black'}'s turn</h1>
         <div style={styles} id='board'>    
         <div className='row'>
                 <Space checkerData ={checkerData} coordinates = {11}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true} isEmpty={allCheckers[0]}/>

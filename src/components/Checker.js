@@ -4,8 +4,7 @@ import blackChecker from '../pics/black-checker.png';
 
 function Checker(props)
 {
-
-    const [isONBoard, setIsOnBoard] = useState(true);
+    //const [isONBoard, setIsOnBoard] = useState(true);
     //const [isSelected, setIsSelected] = useState(false);
     //const [coordinates, setCoordinates] = useState('');
 
@@ -13,30 +12,38 @@ function Checker(props)
     //setIsOnBoard(props.onBoard);
     function handleClick()
     {
-
-        if (props.isSelectedV)
-        {
-            if (props.isSelectedParentV)
-            {
-                props.isSelectedParentF(false);
-                props.isSelectedF(false);
-            }
+            if (props.isSelectedV)
+            {   
+                if (props.isSelectedParentV)
+                {
+                    props.isSelectedParentF(false);
+                    props.isSelectedF(false);
+                }
             
-        }
-        else
-        {
-            if (props.isSelectedParentV)
-            {
-                //do nothing
             }
             else
             {
-                props.isSelectedParentF(true);
-                props.isSelectedF(true); 
-                props.checkerData.setCoordinates(props.coordinates);
-                props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
+                if (props.isSelectedParentV)
+                {
+                //do nothing
+                }
+                else
+                {
+
+                    if (props.checkerData.turn == props.isRed)
+                    {
+
+                    props.isSelectedParentF(true);
+                    props.isSelectedF(true); 
+                    props.checkerData.setCoordinates(props.coordinates);
+                    props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
+                    }
+                    else
+                    {
+                        //do nothing
+                    }
+                }
             }
-        }
         
     }
     let image;
@@ -71,12 +78,12 @@ function Checker(props)
         borderStyle = b2;
     }
 
-    if (isONBoard)
-    {
+    /*if (isONBoard)
+    {*/
     return (
             <img style={borderStyle} onClick={handleClick}src={image} height={50} width={50}/>
     )
-    }
+  //  }
 
 }
 
