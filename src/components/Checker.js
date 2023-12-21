@@ -82,6 +82,7 @@ function Checker(props)
     {*/
     return (
             <img style={borderStyle} onClick={handleClick}src={image} height={50} width={50}/>
+            
     )
   //  }
 
