@@ -102,13 +102,39 @@ function handleClick()
         {
                 //find the 'skip' coordinate (the one 2 rows away from where the checker currently is)
             let skipCoordinate;
-            let difference = props.checkerData.coordinates - coordinates
+            let checkersCoord = props.checkerData.coordinates;
+            let difference = checkersCoord - coordinates;
+            
             switch(difference)
             {
-                case (-18): skipCoordinate = coordinates - 9;break;
-                case (-14): skipCoordinate = coordinates - 7;break;
-                case 14: skipCoordinate = coordinates + 7;break;
-                case 18: skipCoordinate = coordinates + 9;break;
+                case (-18): 
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 9;
+                    }break;
+                }
+                case (-14):
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 7;
+                    }break;
+                }
+                case 14: 
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 7;
+                    }break;
+                }
+                case 18:
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 9;
+                    }break;
+                }
                 default: skipCoordinate = 0; return;
             }
                 //check color (find a way to get this info)
@@ -279,15 +305,42 @@ function handleMouseEnter()
         {
                 //find the 'skip' coordinate (the one 2 rows away from where the checker currently is)
             let skipCoordinate;
-            let difference = props.checkerData.coordinates - coordinates
+            let checkersCoord = props.checkerData.coordinates;
+            let difference = checkersCoord - coordinates;
+
             switch(difference)
             {
-                case (-18): skipCoordinate = coordinates - 9;break;
-                case (-14): skipCoordinate = coordinates - 7;break;
-                case 14: skipCoordinate = coordinates + 7;break;
-                case 18: skipCoordinate = coordinates + 9;break;
+                case (-18): 
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 9;
+                    }break;
+                }
+                case (-14):
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 7;
+                    }break;
+                }
+                case 14: 
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 7;
+                    }break;
+                }
+                case 18:
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 9;
+                    }break;
+                }
                 default: skipCoordinate = 0; return;
             }
+
                 //check color (find a way to get this info)
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
             {
@@ -314,13 +367,39 @@ function handleMouseLeave()
         {
              //find the 'skip' coordinate (the one 2 rows away from where the checker currently is)
             let skipCoordinate;
-            let difference = props.checkerData.coordinates - coordinates
+            let checkersCoord = props.checkerData.coordinates;
+            let difference = checkersCoord - coordinates;
+            
             switch(difference)
             {
-                case (-18): skipCoordinate = coordinates - 9;break;
-                case (-14): skipCoordinate = coordinates - 7;break;
-                case 14: skipCoordinate = coordinates + 7;break;
-                case 18: skipCoordinate = coordinates + 9;break;
+                case (-18): 
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 9;
+                    }break;
+                }
+                case (-14):
+                { 
+                    if(isKingF(checkersCoord) || isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates - 7;
+                    }break;
+                }
+                case 14: 
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 7;
+                    }break;
+                }
+                case 18:
+                { 
+                    if(isKingF(checkersCoord) || !isRedF(checkersCoord))
+                    {
+                        skipCoordinate = coordinates + 9;
+                    }break;
+                }
                 default: skipCoordinate = 0; return;
             }
             
