@@ -14,6 +14,7 @@ const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is the chec
 
 let isRed = isRedF(coordinates);
 let isEmpty = isEmptyF(coordinates);
+let isKing = isKingF(coordinates);
 //const [checkerData, setCheckerData] = useState([]);
 //const [isEmpty, setIsEmpty] = useState(true);
 
@@ -37,7 +38,19 @@ function isRedF(coord){
          return props.checkerData.show[i].isRed;
       }
     }
-    return true;
+    return null;
+}
+
+//may have to adjust this function
+function isKingF(coord){
+    for (let i = 0; i < props.checkerData.show.length; i++)
+    {
+      if (props.checkerData.show[i].coordinate == coord)
+      {
+         return props.checkerData.show[i].isKing;
+      }
+    }
+    return false;
 }
 
 function handleLoad()
@@ -58,6 +71,21 @@ function handleClick()
             let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates)
             temp[index].coordinate = coordinates;
             
+            //check if checker is now a king
+            if (temp[index].isRed)
+            {
+                if (coordinates == 57 || coordinates == 59 || coordinates == 61 || coordinates == 63)
+                {
+                    temp[index].isKing = true;
+                }
+            }
+            else // is black
+            {
+                if (coordinates == 0 || coordinates == 2 || coordinates == 4 || coordinates == 6)
+                {
+                    temp[index].isKing = true;
+                }
+            }
             //set array with updated info
             props.checkerData.setShow(temp);
 
@@ -112,7 +140,23 @@ function captureChecker()
     //changing location of moved checker 
     let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates)
     temp[index].coordinate = coordinates;
-            
+    
+    //check if checker is now a king
+    if (temp[index].isRed)
+    {
+        if (coordinates == 57 || coordinates == 59 || coordinates == 61 || coordinates == 63)
+        {
+            temp[index].isKing = true;
+        }
+    }
+    else // is black
+    {
+        if (coordinates == 0 || coordinates == 2 || coordinates == 4 || coordinates == 6)
+        {
+            temp[index].isKing = true;
+        }
+    }
+
     //getting index of captured checker
     let adjustment;
     let difference = props.checkerData.coordinates - coordinates;
@@ -130,6 +174,7 @@ function captureChecker()
     let secondHalf = temp.slice(index2 + 1);
     temp = firstHalf.concat(secondHalf);
 
+    
     //set array with updated info
     props.checkerData.setShow(temp);
 }
@@ -344,7 +389,7 @@ if (isEmpty)
 }
 else
 {
-    checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed}/>;
+    checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed} isKing={isKing}/>;
 }
 
 function isRedFromArr(coord) {

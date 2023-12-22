@@ -2,24 +2,38 @@
 .row {
     display:flex;
     justify-content: center;
+    background-color: aqua;
+    
 }
 
 div {
     display:grid;
+    
 }
 #board 
 {
-    border: 5px solid red;
+    width: min-content;
+    border: 10px solid burlywood;
+    border-radius: 5%;
+    align-content: center;
+    
 }
 
 .overlay
 {
     position: absolute;
     border: 0;
-    transition: .5s ease;
+    transition: 0.5s ease;
+    
 }
 .container
 {
     position: relative;
-    border: 3px solid black;
+    /*border: 3px solid black;*/
+
+}
+
+#checker
+{
+    box-shadow: 1px, 1px, 10px 0px red;
 }

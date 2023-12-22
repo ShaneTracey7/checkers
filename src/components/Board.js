@@ -16,35 +16,35 @@ function Board()
 
     //data for each checker on on the board
     const intialCheckerData = [
-        {isRed: true, coordinate: 0},
-        {isRed: true, coordinate: 2},
-        {isRed: true, coordinate: 4},
-        {isRed: true, coordinate: 6},
+        {isKing: false, isRed: true, coordinate: 0},
+        {isKing: false, isRed: true, coordinate: 2},
+        {isKing: false, isRed: true, coordinate: 4},
+        {isKing: false, isRed: true, coordinate: 6},
         
-        {isRed: true,coordinate: 9},
-        {isRed: true, coordinate: 11},
-        {isRed: true, coordinate: 13},
-        {isRed: true, coordinate: 15},
+        {isKing: false, isRed: true,coordinate: 9},
+        {isKing: false, isRed: true, coordinate: 11},
+        {isKing: false, isRed: true, coordinate: 13},
+        {isKing: false, isRed: true, coordinate: 15},
         
-        {isRed: true, coordinate: 16},
-        {isRed: true, coordinate: 18},
-        {isRed: true, coordinate: 20},
-        {isRed: true, coordinate: 22},
+        {isKing: false, isRed: true, coordinate: 16},
+        {isKing: false,isRed: true, coordinate: 18},
+        {isKing: false, isRed: true, coordinate: 20},
+        {isKing: false, isRed: true, coordinate: 22},
 
-        {isRed: false, coordinate: 41},
-        {isRed: false, coordinate: 43},
-        {isRed: false, coordinate: 45},
-        {isRed: false, coordinate: 47},
+        {isKing: false, isRed: false, coordinate: 41},
+        {isKing: false, isRed: false, coordinate: 43},
+        {isKing: false, isRed: false, coordinate: 45},
+        {isKing: false, isRed: false, coordinate: 47},
 
-        {isRed: false, coordinate: 48},
-        {isRed: false, coordinate: 50},
-        {isRed: false, coordinate: 52},
-        {isRed: false, coordinate: 54},
+        {isKing: false, isRed: false, coordinate: 48},
+        {isKing: false, isRed: false, coordinate: 50},
+        {isKing: false, isRed: false, coordinate: 52},
+        {isKing: false, isRed: false, coordinate: 54},
 
-        {isRed: false, coordinate: 57},
-        {isRed: false, coordinate: 59},
-        {isRed: false, coordinate: 61},
-        {isRed: false, coordinate: 63}
+        {isKing: false, isRed: false, coordinate: 57},
+        {isKing: false, isRed: false, coordinate: 59},
+        {isKing: false, isRed: false, coordinate: 61},
+        {isKing: false, isRed: false, coordinate: 63}
           
       ];
 
@@ -80,6 +80,10 @@ function toDisplay()
                 else
                 {
                         str = str + "| B";   
+                }
+                if (allCheckers[i].isKing)
+                {
+                        str = str + "K";
                 }
 
                 str = str + allCheckers[i].coordinate;

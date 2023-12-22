@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import redChecker from '../pics/red-checker.png';
 import blackChecker from '../pics/black-checker.png';
+import redKingChecker from '../pics/red-king-checker.png';
+import blackKingChecker from '../pics/black-king-checker.png';
 
 function Checker(props)
 {
@@ -49,24 +51,44 @@ function Checker(props)
     let image;
 
     if (props.isRed)
-    {
-        image = redChecker; 
+    {   
+        if (props.isKing)
+        {
+            image = redKingChecker;
+        }
+        else
+        {
+            image = redChecker; 
+        }
     }
     else
     {
-        image = blackChecker;
+        if (props.isKing)
+        {
+            image = blackKingChecker;
+        }
+        else
+        {
+            image = blackChecker; 
+        }
     }
 
     let borderStyle;
 
     const b1 = {
-        border: "3px solid blue",
-        borderRadius: "30px"
+        //border: "3px solid blue",
+        marginLeft: "3px",
+        marginTop: "3px",
+        borderRadius: "30px",
+        boxShadow: "1px 1px 8px 1px blue"
       };
 
       const b2 = {
-        border: "3px solid white",
-        borderRadius: "30px"
+        //border: "3px solid white",
+        marginLeft: "3px",
+        marginTop: "3px",
+        borderRadius: "30px",
+        boxShadow: "1px 1px 10px 0px black"
       };
 
     if (props.isSelectedV)
@@ -81,7 +103,7 @@ function Checker(props)
     /*if (isONBoard)
     {*/
     return (
-            <img style={borderStyle} onClick={handleClick}src={image} height={50} width={50}/>
+            <img style={borderStyle} onClick={handleClick} src={image} height={50} width={50}/>
             
     )
   //  }
