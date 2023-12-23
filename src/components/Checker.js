@@ -77,16 +77,16 @@ function Checker(props)
 
     const b1 = {
         //border: "3px solid blue",
-        marginLeft: "3px",
         marginTop: "3px",
+        marginLeft: "3px",
         borderRadius: "30px",
         boxShadow: "1px 1px 8px 1px blue"
       };
 
       const b2 = {
         //border: "3px solid white",
-        marginLeft: "3px",
         marginTop: "3px",
+        marginLeft: "3px",
         borderRadius: "30px",
         boxShadow: "1px 1px 10px 0px black"
       };

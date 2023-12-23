@@ -414,30 +414,39 @@ function handleMouseLeave()
 
 let bg = ''; //border for space
 let image;
-
 if (props.isWhite)
-{
-    image = whiteSpace;
-    bg = '3px solid white';
-}
-else
-{
-    image = blackSpace;
-    bg = '3px solid black';
-}
+    {
+        image = whiteSpace;
+    }
+    else
+    {
+        image = blackSpace;
+    }
+let sty;
 if (isHover && props.isSelectedParentV)
 {
-    bg = '3px solid blue';
+    const s1 = {
+        border: "3px solid white",
+        borderRadius: "100%",
+         filter: "opacity(80%) invert(70%) sepia(100%) saturate(5000%) hue-rotate(245deg) brightness(150%) contrast(147%) blur(3px)"
+      };
+      sty = s1;
 }
 else
 {
     if (props.isWhite)
     {
-        bg = '3px solid white'; 
+        const s2 = {
+           border: "3px solid white",
+          };
+          sty = s2;
     }
     else
     {
-        bg = '3px solid black';
+        const s3 = {
+           border: "3px solid black",
+          };
+          sty = s3;
     }
 }
 
@@ -449,14 +458,13 @@ else
 {
     checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed} isKing={isKing}/>;
 }
-
+//<img style={{sty}}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
 //onLoad={handleLoad}
 return (
 <div style={styles} className='container'>
-    <img style={{border:bg}}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
+    <img style={sty}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
     <div className='overlay'>
         {checkerStr}
-        {coordinates}
         </div>
 </div>
 )
