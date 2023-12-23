@@ -6,12 +6,6 @@ import blackKingChecker from '../pics/black-king-checker.png';
 
 function Checker(props)
 {
-    //const [isONBoard, setIsOnBoard] = useState(true);
-    //const [isSelected, setIsSelected] = useState(false);
-    //const [coordinates, setCoordinates] = useState('');
-
-    //setIsOnBoard((isONBoard) => isONBoard = false);
-    //setIsOnBoard(props.onBoard);
     function handleClick()
     {
             if (props.isSelectedV)
@@ -21,7 +15,6 @@ function Checker(props)
                     props.isSelectedParentF(false);
                     props.isSelectedF(false);
                 }
-            
             }
             else
             {
@@ -31,14 +24,12 @@ function Checker(props)
                 }
                 else
                 {
-
                     if (props.checkerData.turn == props.isRed)
                     {
-
-                    props.isSelectedParentF(true);
-                    props.isSelectedF(true); 
-                    props.checkerData.setCoordinates(props.coordinates);
-                    props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
+                        props.isSelectedParentF(true);
+                        props.isSelectedF(true); 
+                        props.checkerData.setCoordinates(props.coordinates);
+                        props.checkerData.setColor(props.isRed); // not neccessay mainly for testing
                     }
                     else
                     {
@@ -46,10 +37,9 @@ function Checker(props)
                     }
                 }
             }
-        
     }
-    let image;
 
+    let image;
     if (props.isRed)
     {   
         if (props.isKing)
@@ -73,35 +63,15 @@ function Checker(props)
         }
     }
 
-    let borderStyle;
-
-    const b1 = {
+    let shadowColor = props.isSelectedV ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
+    const borderStyle = {
         //border: "3px solid blue",
         marginTop: "3px",
         marginLeft: "3px",
         borderRadius: "30px",
-        boxShadow: "1px 1px 8px 1px blue"
+        boxShadow: shadowColor
       };
 
-      const b2 = {
-        //border: "3px solid white",
-        marginTop: "3px",
-        marginLeft: "3px",
-        borderRadius: "30px",
-        boxShadow: "1px 1px 10px 0px black"
-      };
-
-    if (props.isSelectedV)
-    {
-        borderStyle = b1;
-    }
-    else
-    {
-        borderStyle = b2;
-    }
-
-    /*if (isONBoard)
-    {*/
     return (
             <img style={borderStyle} onClick={handleClick} src={image} height={50} width={50}/>
             

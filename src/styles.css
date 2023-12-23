@@ -13,8 +13,31 @@ div {
     width: min-content;
     border: 10px solid burlywood;
     border-radius: 5%;
-    align-content: center;
+    margin: 0 auto;
     
+}
+
+#menu 
+{
+    width: 300px;
+    border: 10px solid yellow;
+    background-color: green;
+    border-radius: 50px;
+    margin: 0 auto;
+    height:fit-content;
+    padding: 20px;
+}
+
+.menuButton{
+    border-radius: 50px;
+    background-color: green;
+    border: 3px solid black;
+    width:fit-content;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .overlay

@@ -1,20 +1,16 @@
 import React, {useState} from 'react';
 import Space from './Space.js';
-import Checker from './Checker.js';
 import styles from '../styles.css';
 
 function Board()
 {
         
-    const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is there any checker on the BOARD selected
-    const [checkerCoordinates, setCheckerCoordinates] = useState();
-    const [lastCheckerCoordinates, setLastCheckerCoordinates] = useState();
-    const [isRed, setIsRed] = useState(false);
-    const [selectedCheckerData, setSelectedCheckerData] = useState([]);
-    const [isRedTurn, setIsRedTurn] = useState(true);
+    const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is there a selected checker on the BOARD selected
+    const [checkerCoordinates, setCheckerCoordinates] = useState(); //coordinates for the selected checker 
+    const [isRed, setIsRed] = useState(false);  //is the selected checker red
+    const [isRedTurn, setIsRedTurn] = useState(true); //is it the red players turn
 
-
-    //data for each checker on on the board
+    //initial data for each checker on on the board
     const intialCheckerData = [
         {isKing: false, isRed: true, coordinate: 0},
         {isKing: false, isRed: true, coordinate: 2},
@@ -45,32 +41,26 @@ function Board()
         {isKing: false, isRed: false, coordinate: 59},
         {isKing: false, isRed: false, coordinate: 61},
         {isKing: false, isRed: false, coordinate: 63}
-          
       ];
-
-    const [allCheckers, setAllCheckers] = useState(intialCheckerData);
+        const [allCheckers, setAllCheckers] = useState(intialCheckerData); //checker object array 
 
     const checkerData = {
-        show: allCheckers,
-        setShow: setAllCheckers,
+        arr: allCheckers,
+        setArr: setAllCheckers,
         coordinates: checkerCoordinates, 
         setCoordinates: setCheckerCoordinates, 
-        lastCoordinates: lastCheckerCoordinates,
-        setLastCoordinates: setLastCheckerCoordinates,
         color: isRed, 
         setColor: setIsRed,
         //may move this into different state later
         turn: isRedTurn,
         setTurn: setIsRedTurn
-
     };
 
 
-// only used for developmen purposes
+// only used for development purposes
 function toDisplay()
 {
         let str = "";
-
         for (let i = 0; i < allCheckers.length; i++)
         {
                 if (allCheckers[i].isRed)
@@ -85,19 +75,37 @@ function toDisplay()
                 {
                         str = str + "K";
                 }
-
                 str = str + allCheckers[i].coordinate;
         }
-
         return str;
 }
-
+        let turnColor;
+        let borderColor;
+        if (isRedTurn)
+        {
+                turnColor = "red";
+                borderColor = "5px solid black";
+        }
+        else
+        {
+                turnColor = "black"
+                borderColor = "5px solid red";
+        }
+        const turnStyle = {
+                borderRadius: "10px",
+                backgroundColor: turnColor,
+                border: borderColor, 
+                margin: "0 auto",
+                color: "white",
+                marginBottom: "5px",
+                padding: "5px"
+        }
+        
     return (
-        <div>
-                 <small>{toDisplay()}</small>
-            <p>{checkerData.coordinates}</p>
-            <p>{checkerData.color ? 'Red':'Black'}</p>
-            <h1>{isRedTurn ? 'Red':'Black'}'s turn</h1>
+        <div style={{margin: "0 auto"}}>
+                <small>{toDisplay()}</small>
+            <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>
+            <h2 style={turnStyle}>{isRedTurn ? 'Red':'Black'}'s turn</h2>
         <div style={styles} id='board'>    
         <div className='row'>
                 <Space checkerData ={checkerData} coordinates = {0}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true} />

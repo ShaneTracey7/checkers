@@ -17,9 +17,9 @@ let isKing = isKingF(coordinates);
 
 //returns if space is empty
 function isEmptyF(coord){
-    for (let i = 0; i < props.checkerData.show.length; i++)
+    for (let i = 0; i < props.checkerData.arr.length; i++)
     {
-      if (props.checkerData.show[i].coordinate == coord)
+      if (props.checkerData.arr[i].coordinate == coord)
       {
          return false;
       }
@@ -29,11 +29,11 @@ function isEmptyF(coord){
 
 //returns if space has a checker and then if it is red
 function isRedF(coord){
-    for (let i = 0; i < props.checkerData.show.length; i++)
+    for (let i = 0; i < props.checkerData.arr.length; i++)
     {
-      if (props.checkerData.show[i].coordinate == coord)
+      if (props.checkerData.arr[i].coordinate == coord)
       {
-         return props.checkerData.show[i].isRed;
+         return props.checkerData.arr[i].isRed;
       }
     }
     return null;
@@ -41,11 +41,11 @@ function isRedF(coord){
 
 //returns if space has a king checker
 function isKingF(coord){
-    for (let i = 0; i < props.checkerData.show.length; i++)
+    for (let i = 0; i < props.checkerData.arr.length; i++)
     {
-      if (props.checkerData.show[i].coordinate == coord)
+      if (props.checkerData.arr[i].coordinate == coord)
       {
-         return props.checkerData.show[i].isKing;
+         return props.checkerData.arr[i].isKing;
       }
     }
     return false;
@@ -66,7 +66,7 @@ function handleClick()
         if(coords[0] == coordinates || coords[1] == coordinates || coords.length == 4 && (coords[2] == coordinates || coords[3] == coordinates))
         {
             //change show new location checker got moved to
-            let temp = props.checkerData.show;
+            let temp = props.checkerData.arr;
             let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates);
             temp[index].coordinate = coordinates;
             
@@ -86,7 +86,7 @@ function handleClick()
                 }
             }
             //set array with updated info
-            props.checkerData.setShow(temp);
+            props.checkerData.setArr(temp);
 
             //switches turn
             props.checkerData.setTurn(!props.checkerData.turn);
@@ -159,7 +159,7 @@ function handleClick()
 //moves checker to new space and removes captured checker from board
 function captureChecker()
 {
-    let temp = props.checkerData.show;
+    let temp = props.checkerData.arr;
 
     //changing location of moved checker 
     let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates)
@@ -199,7 +199,7 @@ function captureChecker()
     temp = firstHalf.concat(secondHalf);
 
     //set array with updated info
-    props.checkerData.setShow(temp);
+    props.checkerData.setArr(temp);
 }
 
 let checkerStr = "";
