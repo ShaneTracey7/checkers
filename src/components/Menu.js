@@ -12,6 +12,9 @@ const [color2, setColor2] = useState("red");
 
 function handleClick1()
 {
+    props.showB(true);
+    props.vsCF(true);
+
     if (color == "blue")
     {
         setColor("green");
@@ -24,6 +27,9 @@ function handleClick1()
 
 function handleClick2()
 {
+    props.showB(true);
+    props.vsCF(false);
+    
     if (color2 == "red")
     {
         setColor2("yellow");
@@ -51,7 +57,7 @@ function handleClick2()
                 <div style={{display: "flex"}} >
                     <img src={person} height={50} width={50}/>
                     <h1 style={{margin: "5px"}} >Vs.</h1>
-                    <img src={computer} height={50} width={60}/>
+                    <img src={person} height={50} width={50}/>
                 </div>
                 <caption style={{display: "block", verticalAlign: "top"}} >Play vs. Human</caption>
             </div>
