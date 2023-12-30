@@ -10,7 +10,7 @@ function Menu(props)
 const [color, setColor] = useState("blue");
 const [color2, setColor2] = useState("red");
 
-function handleClick1()
+function handleClickComputer()
 {
     props.showB(true);
     props.vsCF(true);
@@ -25,11 +25,11 @@ function handleClick1()
     }
 }
 
-function handleClick2()
+function handleClickHuman()
 {
     props.showB(true);
     props.vsCF(false);
-    
+
     if (color2 == "red")
     {
         setColor2("yellow");
@@ -45,7 +45,7 @@ function handleClick2()
         <div id="menu" style={styles}>
             <h1>Checkers</h1>
             
-            <div style={{backgroundColor: color}} onClick={handleClick1} class="menuButton">
+            <div style={{backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
                 <div style={{display: "flex"}} >
                     <img src={person} height={50} width={50}/>
                     <h1 style={{margin: "5px"}} >Vs.</h1>
@@ -53,7 +53,7 @@ function handleClick2()
                 </div>
                 <caption style={{display: "block", verticalAlign: "top"}} >Play vs. Computer</caption>
             </div>
-            <div style={{backgroundColor: color2}} onClick={handleClick2} class="menuButton">
+            <div style={{backgroundColor: color2}} onClick={handleClickHuman} class="menuButton">
                 <div style={{display: "flex"}} >
                     <img src={person} height={50} width={50}/>
                     <h1 style={{margin: "5px"}} >Vs.</h1>

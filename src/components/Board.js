@@ -16,11 +16,12 @@ function Board(props)
     const verticalCoords = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63];
     let coordArr;
     let spaceColour;
-    
+
     if (props.vsC)
     {
         coordArr = verticalCoords;
         spaceColour = [true,false];
+
     }
     else
     {
@@ -135,91 +136,91 @@ function toDisplay()
             </div>
         <div style={styles} id='board'>    
         <div className='row'>
-                <Space checkerData ={checkerData} coordinates = {coordArr[0]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[1]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[2]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[3]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[4]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[5]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[6]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[7]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[0]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[1]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[2]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[3]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[4]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[5]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[6]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[7]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                
         </div>
         <div className='row'>
-                <Space checkerData ={checkerData} coordinates = {coordArr[8]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
-                <Space checkerData ={checkerData} coordinates = {coordArr[9]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[10]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[11]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[12]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[13]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[14]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[15]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[8]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[9]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[10]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[11]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[12]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[13]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[14]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[15]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          </div>
         <div className='row'>      
-                <Space checkerData ={checkerData} coordinates = {coordArr[16]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[17]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
-                <Space checkerData ={checkerData} coordinates = {coordArr[18]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[19]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[20]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[21]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[22]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[23]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[16]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[17]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[18]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[19]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[20]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[21]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[22]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[23]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                
         </div>
         <div className='row'>
-                <Space checkerData ={checkerData} coordinates = {coordArr[24]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
-                <Space checkerData ={checkerData} coordinates = {coordArr[25]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[26]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[27]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[28]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[29]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[30]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[31]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[24]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[25]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[26]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[27]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[28]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[29]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[30]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[31]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          
         </div>
         <div className='row'>
-               <Space checkerData ={checkerData} coordinates = {coordArr[32]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[33]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
-                <Space checkerData ={checkerData} coordinates = {coordArr[34]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[35]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[36]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[37]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[38]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[39]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+               <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[32]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[33]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[34]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[35]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[36]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[37]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[38]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[39]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                
         </div>
         <div className='row'>
-                <Space checkerData ={checkerData} coordinates = {coordArr[40]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
-                <Space checkerData ={checkerData} coordinates = {coordArr[41]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[42]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[43]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[44]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
-                <Space checkerData ={checkerData} coordinates = {coordArr[45]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[46]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[47]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[40]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[41]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[42]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[43]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[44]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[45]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[46]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[47]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          
         </div>
         <div className='row'>
 
-                <Space checkerData ={checkerData} coordinates = {coordArr[48]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[49]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
-                <Space checkerData ={checkerData} coordinates = {coordArr[50]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[51]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[52]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[53]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[54]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[55]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[48]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[49]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[50]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[51]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[52]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[53]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[54]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[55]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                
         </div>
         <div className='row'>
-                <Space checkerData ={checkerData} coordinates = {coordArr[56]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
-                <Space checkerData ={checkerData} coordinates = {coordArr[57]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[58]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[59]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[60]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[61]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[62]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
-                <Space checkerData ={checkerData} coordinates = {coordArr[63]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} /*isEmpty={allCheckers[63]}*//>
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[56]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[57]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[58]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[59]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[60]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[61]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[62]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
+                <Space vsC={props.vsC} checkerData ={checkerData} coordinates = {coordArr[63]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} /*isEmpty={allCheckers[63]}*//>
          
         </div>
         

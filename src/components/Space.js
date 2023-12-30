@@ -51,12 +51,6 @@ function isKingF(coord){
     return false;
 }
 
-//not in use
-function handleLoad()
-{
-
-}
-
 //function that moves checker and performs required operations to state, when checker is moved, if checker is satisfies requiremnts.
 function handleClick()
 {
@@ -89,12 +83,23 @@ function handleClick()
             props.checkerData.setArr(temp);
 
             //switches turn
-            props.checkerData.setTurn(!props.checkerData.turn);
+           // props.checkerData.setTurn(!props.checkerData.turn);
 
             setIsHover(false); // space is not highlighted
             setIsCheckerSelected(false);  //checker is not selected on SPACE
             props.isSelectedParentF(false); //checker is not selected on BOARD
             props.checkerData.setCoordinates(coordinates); //setting checker coordinates
+
+            if(props.vsC)
+            {
+                computersTurn();
+            }
+            else
+            {
+                    //switches turn
+                props.checkerData.setTurn(!props.checkerData.turn);
+            }
+
             return;
         }
 
@@ -141,20 +146,145 @@ function handleClick()
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
                 {
                     captureChecker();
-                    
-                    //switches turn
-                    props.checkerData.setTurn(!props.checkerData.turn);
-
+            
                     setIsHover(false); // space is not highlighted
                     setIsCheckerSelected(false);  //checker is not selected on SPACE
                     props.isSelectedParentF(false); //checker is not selected on BOARD
                     props.checkerData.setCoordinates(coordinates); //setting checker coordinates
+
+                    if(props.vsC)
+                    {
+                        computersTurn();
+                    }
+                    else
+                    {
+                        //switches turn
+                        props.checkerData.setTurn(!props.checkerData.turn);
+                    }
+
                     return;
                 }
         }
 
     }
 }
+
+
+//called within computersTurn function, it updates all the data and moves the checker
+function moveChecker(currentCoord, destinationCoord, isCapture)
+{
+    //change show new location checker got moved to
+    let temp = props.checkerData.arr;
+    let index = temp.findIndex((obj) => obj.coordinate == currentCoord);
+    temp[index].coordinate = destinationCoord;
+    
+    //check if checker is now a king
+    if (destinationCoord == 0 || destinationCoord == 2 || destinationCoord == 4 || destinationCoord == 6)
+    {
+        temp[index].isKing = true;
+    }
+    if(isCapture)
+    {
+        //getting index of captured checker
+        let adjustment;
+        let difference = currentCoord - destinationCoord;
+        switch(difference)
+        {
+            case (-18): adjustment = 9;break;
+            case (-14): adjustment = 7;break;
+            case 14: adjustment = -7;break;
+            case 18: adjustment = -9;break;
+            default: adjustment = 0; return;
+        }
+        //removing captured checker 
+        let index2 = temp.findIndex((obj) => obj.coordinate == currentCoord + adjustment)
+        let firstHalf = temp.slice(0, index2);
+        let secondHalf = temp.slice(index2 + 1);
+        temp = firstHalf.concat(secondHalf);
+    }
+
+    //set array with updated info
+    props.checkerData.setArr(temp);
+
+    //props.checkerData.setCoordinates(destinationCoord); //setting checker coordinates
+    
+}
+
+//algorithm for the computer's turn 
+function computersTurn()
+{
+
+for (let i = 0; i < props.checkerData.arr.length; i++)
+    {
+            //find a checker on the board of the right color (default AI is gonna be black)
+      if (props.checkerData.arr[i].isRed == false)
+      {
+        let checkerCoord = props.checkerData.arr[i].coordinate;
+        let coords = getCoordinateOptionsComputer(checkerCoord);
+            //find if checker can be moved
+        if (coords[0] != -1 && isEmptyF(coords[0]))
+        {
+            moveChecker(checkerCoord,coords[0], false);
+            return;
+        }
+        else if (coords[1] != -1 && isEmptyF(coords[1]))
+        {
+            moveChecker(checkerCoord,coords[1], false);
+            return;
+        }
+        else if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
+        {
+            moveChecker(checkerCoord,coords[2], false);
+            
+            return;
+        }
+        else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
+        {
+            moveChecker(checkerCoord,coords[3], false);
+            return;
+        }
+    
+        // check if any spaces have a red checker (opponents checker)
+        else if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
+        {
+            if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
+            {
+                moveChecker(checkerCoord,(checkerCoord - 18), true);
+                return;
+            }
+        }
+        else if (coords[1] != -1 && isRedF(coords[1]) != null && isRedF(coords[1])) 
+        {
+            if((checkerCoord - 14) >= 0 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord - 14))
+            {
+                moveChecker(checkerCoord,(checkerCoord - 14), true);
+                return;
+            }
+        }
+        else if ( coords.length == 4 && coords[2] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+        {
+            if((checkerCoord + 14) <= 63 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord + 14))
+            {
+                moveChecker(checkerCoord,(checkerCoord + 14), true);
+                return;
+            }
+        }
+        else if (coords.length == 4 && coords[3] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+        {
+            if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
+            {
+                moveChecker(checkerCoord,(checkerCoord + 18), true);
+                return;
+            }
+        }
+        else
+        {
+            //do nothing
+        }
+      }
+    }
+}
+
 
 //moves checker to new space and removes captured checker from board
 function captureChecker()
@@ -206,9 +336,82 @@ let checkerStr = "";
 
 
 //returns all possible locations a checker can move to (without overtaking a checker)
+function getCoordinateOptionsComputer(coord)
+{
+    const c = coord;
+    let factor1, factor2;
+
+    if (isKingF(c))
+    {
+        if (c >= 56)
+        {
+            if(c == 63)
+            {
+                return [54,-1];
+            }
+            else
+            {
+                return [c - 9,c - 7];
+            }
+        }
+        else if (c <= 7)
+        {   
+            if(c == 0)
+            {
+                return [-1,9];
+            }
+            else
+            {
+                return [c + 7,c + 9];
+            }
+        }
+        else 
+        {
+            if(c == 16 || c == 32 || c == 48) //bounded by left side of board
+            {
+                return [-1,c-7,-1,c+9];
+            }
+            else if (c == 15 || c == 31 || c == 47) //bounded by right side of board
+            {
+                return [c-9,-1,c+7,-1];
+            }
+            else //not bounded by any sides
+            {
+                return [c-9,c-7,c+7,c+9];
+            }
+
+        }
+    }
+    else // not king
+    {
+        if (c <= 7)
+        {
+            //do nothing
+            return [-1,-1];
+        }
+        factor1 = -7;
+        factor2 = -9;
+        }
+    
+        if (c == 0 || c == 16 || c ==32 || c == 48) //left column of board
+        {
+            return [-1, c + (factor1)];
+        }
+        else if(c == 15 || c == 31|| c == 47 || c == 63)
+        {           
+            return [c + (factor2), -1];
+        }
+        else
+        {
+            return [c + (factor2),c + (factor1)];
+        }
+    }
+
+
+//returns all possible locations a checker can move to (without overtaking a checker)
 function getCoordinateOptions()
 {
-    const c = props.checkerData.coordinates;
+    const c = props.checkerData.coordinates; //selected checker
     let factor1, factor2;
 
     if (isKingF(c))
@@ -462,7 +665,7 @@ else
 //onLoad={handleLoad}
 return (
 <div style={styles} className='container'>
-    <img style={sty}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
+    <img style={sty} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
     <div className='overlay'>
         {checkerStr}
         </div>
