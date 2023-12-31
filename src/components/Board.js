@@ -7,9 +7,10 @@ function Board(props)
 {
         
     const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is there a selected checker on the BOARD selected
-    const [checkerCoordinates, setCheckerCoordinates] = useState(); //coordinates for the selected checker 
+    const [checkerCoordinates, setCheckerCoordinates] = useState(-1); //coordinates for the selected checker 
     const [isRed, setIsRed] = useState(false);  //is the selected checker red
     const [isRedTurn, setIsRedTurn] = useState(true); //is it the red players turn
+    const [lastCheckerCoord, setLastCheckerCoord] = useState(100); //coordinates of last checker coordinates
 
     //changing to horizontal/vertical view dependent on game style (vs. Human OR vs. Computer)
     const horizontalCoords =[7,15,23,31,39,47,55,63,6,14,22,30,38,46,54,62,5,13,21,29,37,45,53,61,4,12,20,28,36,44,52,60,3,11,19,27,35,43,51,59,2,10,18,26,34,42,50,58,1,9,17,25,33,41,49,57,0,8,16,24,32,40,48,56];
@@ -70,6 +71,8 @@ function Board(props)
         setCoordinates: setCheckerCoordinates, 
         color: isRed, 
         setColor: setIsRed,
+        lastCoord: lastCheckerCoord,
+        setLastCoord: setLastCheckerCoord,
         //may move this into different state later
         turn: isRedTurn,
         setTurn: setIsRedTurn

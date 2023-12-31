@@ -6,13 +6,20 @@ import blackKingChecker from '../pics/black-king-checker.png';
 
 function Checker(props)
 {
+    
+    if(props.checkerData.coordinates == -1)
+    {
+        props.isSelectedF(false);
+    }
+
     function handleClick()
     {
-            if (props.isSelectedV)
+            if (props.isSelectedV) // is checker selected from Space
             {   
-                if (props.isSelectedParentV)
+                if (props.isSelectedParentV) // is checker selected from  Board
                 {
                     props.isSelectedParentF(false);
+                    props.checkerData.setCoordinates(-1);
                     props.isSelectedF(false);
                 }
             }
@@ -63,7 +70,7 @@ function Checker(props)
         }
     }
 
-    let shadowColor = props.isSelectedV ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
+    let shadowColor = props.isSelectedV && props.checkerData.coordinates != -1 ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
     const borderStyle = {
         //border: "3px solid blue",
         marginTop: "3px",

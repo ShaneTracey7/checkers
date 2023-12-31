@@ -4,16 +4,54 @@ import blackSpace from '../pics/black-space.png';
 import styles from '../styles.css';
 import Checker from './Checker';
 
+/*
+need to figure out how to fix isCheckerSelected issue.
+
+is currently checking that the selected coord (in checkerdata) is not -1 (to make sure it still is on the space that it was selected on before it moved)
+
+
+*/
+
+
+
+
+
+
+
 function Space(props)
 {
 
 const [isHover, setIsHover] = useState(false); //boolean variable: true if player can move checker to space that is hovered over, false if player can't
-const coordinates = props.coordinates; //11 TO 88 (first-digit -> Y Axis, second-digit X Axis)
+const coordinates = props.coordinates; //0 TO 63 
 const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is the checker on the SPACE selected
+
+//use the props.checkerData.coordinates value if the value is within the range, as the condition for isCheckerSelected
+let isCheckerSelectedSup = isCheckerSelectedF();
 
 let isRed = isRedF(coordinates);
 let isEmpty = isEmptyF(coordinates);
 let isKing = isKingF(coordinates);
+//let isLast = isLastF(coordinates);
+
+//tester function
+function isCheckerSelectedF(){
+    let coord = props.checkerData.coordinates; //selected checker
+    if (coord >= 0 && coord <= 63)
+    {
+       return true;
+    }
+    return false;
+  }
+
+//tester function
+function isLastF(coord){
+      if (props.checkerData.lastCoord == coord)
+      {
+         return true;
+      }
+      return false;
+    }
+
 
 //returns if space is empty
 function isEmptyF(coord){
@@ -84,22 +122,26 @@ function handleClick()
 
             //switches turn
            // props.checkerData.setTurn(!props.checkerData.turn);
-
+            
             setIsHover(false); // space is not highlighted
+            props.checkerData.setCoordinates(-1);
             setIsCheckerSelected(false);  //checker is not selected on SPACE
             props.isSelectedParentF(false); //checker is not selected on BOARD
-            props.checkerData.setCoordinates(coordinates); //setting checker coordinates
+            props.checkerData.setLastCoord(props.checkerData.coordinates); //setting selected checkers last coord
+            //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
 
             if(props.vsC)
             {
                 computersTurn();
+                //checker was never selected, it was chosen. 
+                //space nvr highlighted
+                //spaces only remove their highlight for the checker on them when a new checker moves there with a handlelick
             }
             else
             {
                     //switches turn
                 props.checkerData.setTurn(!props.checkerData.turn);
             }
-
             return;
         }
 
@@ -148,20 +190,21 @@ function handleClick()
                     captureChecker();
             
                     setIsHover(false); // space is not highlighted
+                    props.checkerData.setCoordinates(-1);
                     setIsCheckerSelected(false);  //checker is not selected on SPACE
                     props.isSelectedParentF(false); //checker is not selected on BOARD
-                    props.checkerData.setCoordinates(coordinates); //setting checker coordinates
+                    //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
 
                     if(props.vsC)
                     {
                         computersTurn();
+                   //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
                     }
                     else
                     {
                         //switches turn
                         props.checkerData.setTurn(!props.checkerData.turn);
                     }
-
                     return;
                 }
         }
@@ -653,9 +696,11 @@ else
     }
 }
 
+
 if (isEmpty)
 {
     //checkerStr = "";
+    //props.checkerData.setCoordinates(-1);
 }
 else
 {
