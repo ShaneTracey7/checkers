@@ -263,35 +263,4 @@ function Board(props)
     );
 }
 
-
- 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-                 <Space checkerData ={intialCheckerData[23]} coordinates = '81' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '82' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[20]} coordinates = '83' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '84' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[21]} coordinates = '85' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '86' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                <Space checkerData ={intialCheckerData[22]} coordinates = '87' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={false}/>
-                <Space checkerData ={[]} coordinates = '88' checkerCoordinatesF={setCheckerCoordinates} isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={true}/>
-                */
-
 export default Board;
