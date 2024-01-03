@@ -31,7 +31,7 @@ function Checker(props)
                 }
                 else
                 {
-                    if (props.checkerData.turn == props.isRed)
+                    if (props.gameData.turn == props.isRed)
                     {
                         props.isSelectedParentF(true);
                         props.isSelectedF(true); 

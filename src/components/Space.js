@@ -4,20 +4,6 @@ import blackSpace from '../pics/black-space.png';
 import styles from '../styles.css';
 import Checker from './Checker';
 
-/*
-need to figure out how to fix isCheckerSelected issue.
-
-is currently checking that the selected coord (in checkerdata) is not -1 (to make sure it still is on the space that it was selected on before it moved)
-
-
-*/
-
-
-
-
-
-
-
 function Space(props)
 {
 
@@ -55,23 +41,54 @@ function isLastF(coord){
 
 //returns if space is empty
 function isEmptyF(coord){
-    for (let i = 0; i < props.checkerData.arr.length; i++)
+    for (let i = 0; i < props.gameData.arr.length; i++)
     {
-      if (props.checkerData.arr[i].coordinate == coord)
+      if (props.gameData.arr[i].coordinate == coord)
       {
          return false;
       }
     }
     return true;
 }
+//returns "r" or "b" if there is only one color left on the board,(someone won) and "" if no winner
+function isWinnerF(arr){
+
+    let red = false;
+    let black = false;
+    for (let i = 0; i < arr.length; i++)
+    {
+        if (arr[i].isRed)
+        {
+            red = true;
+        }
+        else //is black
+        {
+            black = true;
+        }
+
+        if (red && black)
+        {
+            return "";
+        }
+    }
+
+    if (red) //red won
+    {
+        return "r";
+    }
+    else // black won
+    {
+        return "b";
+    }
+}
 
 //returns if space has a checker and then if it is red
 function isRedF(coord){
-    for (let i = 0; i < props.checkerData.arr.length; i++)
+    for (let i = 0; i < props.gameData.arr.length; i++)
     {
-      if (props.checkerData.arr[i].coordinate == coord)
+      if (props.gameData.arr[i].coordinate == coord)
       {
-         return props.checkerData.arr[i].isRed;
+         return props.gameData.arr[i].isRed;
       }
     }
     return null;
@@ -79,11 +96,11 @@ function isRedF(coord){
 
 //returns if space has a king checker
 function isKingF(coord){
-    for (let i = 0; i < props.checkerData.arr.length; i++)
+    for (let i = 0; i < props.gameData.arr.length; i++)
     {
-      if (props.checkerData.arr[i].coordinate == coord)
+      if (props.gameData.arr[i].coordinate == coord)
       {
-         return props.checkerData.arr[i].isKing;
+         return props.gameData.arr[i].isKing;
       }
     }
     return false;
@@ -98,7 +115,7 @@ function handleClick()
         if(coords[0] == coordinates || coords[1] == coordinates || coords.length == 4 && (coords[2] == coordinates || coords[3] == coordinates))
         {
             //change show new location checker got moved to
-            let temp = props.checkerData.arr;
+            let temp = props.gameData.arr;
             let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates);
             temp[index].coordinate = coordinates;
             
@@ -118,7 +135,7 @@ function handleClick()
                 }
             }
             //set array with updated info
-            props.checkerData.setArr(temp);
+            props.gameData.setArr(temp);
 
             //switches turn
            // props.checkerData.setTurn(!props.checkerData.turn);
@@ -130,9 +147,10 @@ function handleClick()
             props.checkerData.setLastCoord(props.checkerData.coordinates); //setting selected checkers last coord
             //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
 
-            if(props.vsC)
+
+            if(props.gameData.vsC)
             {
-                computersTurn();
+                computersTurn(temp);
                 //checker was never selected, it was chosen. 
                 //space nvr highlighted
                 //spaces only remove their highlight for the checker on them when a new checker moves there with a handlelick
@@ -140,8 +158,9 @@ function handleClick()
             else
             {
                     //switches turn
-                props.checkerData.setTurn(!props.checkerData.turn);
+                props.gameData.setTurn(!props.gameData.turn);
             }
+
             return;
         }
 
@@ -186,8 +205,9 @@ function handleClick()
             }
                 //check color (find a way to get this info)
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
-                {
-                    captureChecker();
+                {   
+
+                    let arr = captureChecker(); //equals null or temp arr
             
                     setIsHover(false); // space is not highlighted
                     props.checkerData.setCoordinates(-1);
@@ -195,15 +215,26 @@ function handleClick()
                     props.isSelectedParentF(false); //checker is not selected on BOARD
                     //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
 
-                    if(props.vsC)
+                    //check if it was a winning move
+                    let w = isWinnerF(arr);
+                    if(w != "")
                     {
-                        computersTurn();
+                        props.gameData.setWinner(w);
+                    }
+
+                    if(props.gameData.vsC)
+                    {   
+                        if (arr != null)
+                        {
+                            computersTurn(arr);
+                        }
+                        
                    //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
                     }
                     else
                     {
                         //switches turn
-                        props.checkerData.setTurn(!props.checkerData.turn);
+                        props.gameData.setTurn(!props.gameData.turn);
                     }
                     return;
                 }
@@ -214,10 +245,10 @@ function handleClick()
 
 
 //called within computersTurn function, it updates all the data and moves the checker
-function moveChecker(currentCoord, destinationCoord, isCapture)
+function moveChecker(currentCoord, destinationCoord, isCapture, arr)
 {
     //change show new location checker got moved to
-    let temp = props.checkerData.arr;
+    let temp = arr; //props.checkerData.arr;
     let index = temp.findIndex((obj) => obj.coordinate == currentCoord);
     temp[index].coordinate = destinationCoord;
     
@@ -244,46 +275,53 @@ function moveChecker(currentCoord, destinationCoord, isCapture)
         let firstHalf = temp.slice(0, index2);
         let secondHalf = temp.slice(index2 + 1);
         temp = firstHalf.concat(secondHalf);
+
+        //check if it was a winning move
+        let w = isWinnerF(temp);
+            if(w != "")
+            {
+                props.gameData.setWinner(w);
+            }
     }
 
     //set array with updated info
-    props.checkerData.setArr(temp);
+    props.gameData.setArr(temp);
 
     //props.checkerData.setCoordinates(destinationCoord); //setting checker coordinates
     
 }
 
 //algorithm for the computer's turn 
-function computersTurn()
+function computersTurn(arr) /* arr =  props.checkerData.arr*/
 {
 
-for (let i = 0; i < props.checkerData.arr.length; i++)
+for (let i = 0; i < arr.length; i++)
     {
             //find a checker on the board of the right color (default AI is gonna be black)
-      if (props.checkerData.arr[i].isRed == false)
+      if (arr[i].isRed == false)
       {
-        let checkerCoord = props.checkerData.arr[i].coordinate;
+        let checkerCoord = arr[i].coordinate;
         let coords = getCoordinateOptionsComputer(checkerCoord);
             //find if checker can be moved
         if (coords[0] != -1 && isEmptyF(coords[0]))
         {
-            moveChecker(checkerCoord,coords[0], false);
+            moveChecker(checkerCoord,coords[0], false, arr);
             return;
         }
         else if (coords[1] != -1 && isEmptyF(coords[1]))
         {
-            moveChecker(checkerCoord,coords[1], false);
+            moveChecker(checkerCoord,coords[1], false, arr);
             return;
         }
         else if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
         {
-            moveChecker(checkerCoord,coords[2], false);
+            moveChecker(checkerCoord,coords[2], false, arr);
             
             return;
         }
         else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
         {
-            moveChecker(checkerCoord,coords[3], false);
+            moveChecker(checkerCoord,coords[3], false, arr);
             return;
         }
     
@@ -292,7 +330,7 @@ for (let i = 0; i < props.checkerData.arr.length; i++)
         {
             if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
             {
-                moveChecker(checkerCoord,(checkerCoord - 18), true);
+                moveChecker(checkerCoord,(checkerCoord - 18), true, arr);
                 return;
             }
         }
@@ -300,7 +338,7 @@ for (let i = 0; i < props.checkerData.arr.length; i++)
         {
             if((checkerCoord - 14) >= 0 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord - 14))
             {
-                moveChecker(checkerCoord,(checkerCoord - 14), true);
+                moveChecker(checkerCoord,(checkerCoord - 14), true, arr);
                 return;
             }
         }
@@ -308,7 +346,7 @@ for (let i = 0; i < props.checkerData.arr.length; i++)
         {
             if((checkerCoord + 14) <= 63 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord + 14))
             {
-                moveChecker(checkerCoord,(checkerCoord + 14), true);
+                moveChecker(checkerCoord,(checkerCoord + 14), true, arr);
                 return;
             }
         }
@@ -316,7 +354,7 @@ for (let i = 0; i < props.checkerData.arr.length; i++)
         {
             if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
             {
-                moveChecker(checkerCoord,(checkerCoord + 18), true);
+                moveChecker(checkerCoord,(checkerCoord + 18), true, arr);
                 return;
             }
         }
@@ -332,7 +370,7 @@ for (let i = 0; i < props.checkerData.arr.length; i++)
 //moves checker to new space and removes captured checker from board
 function captureChecker()
 {
-    let temp = props.checkerData.arr;
+    let temp = props.gameData.arr;
 
     //changing location of moved checker 
     let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates)
@@ -363,7 +401,7 @@ function captureChecker()
         case (-14): adjustment = 7;break;
         case 14: adjustment = -7;break;
         case 18: adjustment = -9;break;
-        default: adjustment = 0; return;
+        default: adjustment = 0; return null;
     }
     //removing captured checker 
     let index2 = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates + adjustment)
@@ -372,7 +410,8 @@ function captureChecker()
     temp = firstHalf.concat(secondHalf);
 
     //set array with updated info
-    props.checkerData.setArr(temp);
+    props.gameData.setArr(temp);
+    return temp; //new 
 }
 
 let checkerStr = "";
@@ -704,7 +743,7 @@ if (isEmpty)
 }
 else
 {
-    checkerStr = <Checker coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed} isKing={isKing}/>;
+    checkerStr = <Checker gameData={props.gameData} coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed} isKing={isKing}/>;
 }
 //<img style={{sty}}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
 //onLoad={handleLoad}
