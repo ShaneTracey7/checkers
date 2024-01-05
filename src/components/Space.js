@@ -326,7 +326,12 @@ function randomize(array) {
                 {
                 case 0: 
                 {
-                    if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
+                    if (coords[0] != -1 && isEmptyF(coords[0]))
+                    {
+                        moveChecker(checkerCoord,coords[0], false, arr);
+                        return;
+                    }
+                    else if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
                     {
                         if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
                         {
@@ -334,17 +339,17 @@ function randomize(array) {
                             return;
                         }
                     }
-                    else if (coords[0] != -1 && isEmptyF(coords[0]))
-                    {
-                        moveChecker(checkerCoord,coords[0], false, arr);
-                        return;
-                    }
                     
                     break;
                 }
                 case 1: 
                 {
-                    if (coords[1] != -1 && isRedF(coords[1]) != null && isRedF(coords[1])) 
+                    if (coords[1] != -1 && isEmptyF(coords[1]))
+                    {
+                        moveChecker(checkerCoord,coords[1], false, arr);
+                        return;
+                    }
+                    else if (coords[1] != -1 && isRedF(coords[1]) != null && isRedF(coords[1])) 
                     {
                         if((checkerCoord - 14) >= 0 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord - 14))
                         {
@@ -352,17 +357,17 @@ function randomize(array) {
                             return;
                         }
                     }
-                    else if (coords[1] != -1 && isEmptyF(coords[1]))
-                    {
-                        moveChecker(checkerCoord,coords[1], false, arr);
-                        return;
-                    }
                     
                     break;
                 }
                 case 2: 
                 {
-                    if ( coords.length == 4 && coords[2] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                    if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
+                    {
+                        moveChecker(checkerCoord,coords[2], false, arr);
+                        return;
+                    }
+                    else if ( coords.length == 4 && coords[2] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
                     {
                         if((checkerCoord + 14) <= 63 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord + 14))
                         {
@@ -370,28 +375,24 @@ function randomize(array) {
                             return;
                         }
                     }
-                    else if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
-                    {
-                        moveChecker(checkerCoord,coords[2], false, arr);
-                        return;
-                    }
+                    
                     
                     break;
                 }
                 case 3: 
                 {
-                    if (coords.length == 4 && coords[3] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                    if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
+                    {
+                        moveChecker(checkerCoord,coords[3], false, arr);
+                        return;
+                    }
+                    else if (coords.length == 4 && coords[3] != -1 && isRedF(coords[3]) != null && isRedF(coords[3]))
                     {
                         if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
                         {
                             moveChecker(checkerCoord,(checkerCoord + 18), true, arr);
                             return;
                         }
-                    }
-                    else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
-                    {
-                        moveChecker(checkerCoord,coords[3], false, arr);
-                        return;
                     }
                     
                     break;
@@ -428,18 +429,18 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
             {
             case 0: 
             {
-                if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
+                if (coords[0] != -1 && isEmptyF(coords[0]))
+                {
+                    moveChecker(checkerCoord,coords[0], false, arr);
+                    return;
+                }
+                else if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
                 {
                     if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
                     {
                         moveChecker(checkerCoord,(checkerCoord - 18), true, arr);
                         return;
                     }
-                }
-                else if (coords[0] != -1 && isEmptyF(coords[0]))
-                {
-                    moveChecker(checkerCoord,coords[0], false, arr);
-                    return;
                 }
                 
                 break;
@@ -482,18 +483,18 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
             }
             case 3: 
             {
-                if (coords.length == 4 && coords[3] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
+                {
+                    moveChecker(checkerCoord,coords[3], false, arr);
+                    return;
+                }
+                else if (coords.length == 4 && coords[3] != -1 && isRedF(coords[3]) != null && isRedF(coords[3]))
                 {
                     if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
                     {
                         moveChecker(checkerCoord,(checkerCoord + 18), true, arr);
                         return;
                     }
-                }
-                else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
-                {
-                    moveChecker(checkerCoord,coords[3], false, arr);
-                    return;
                 }
                 
                 break;
