@@ -10,7 +10,6 @@ function Board(props)
     const [checkerCoordinates, setCheckerCoordinates] = useState(-1); //coordinates for the selected checker 
     const [isRed, setIsRed] = useState(false);  //is the selected checker red
     const [isRedTurn, setIsRedTurn] = useState(true); //is it the red players turn
-    const [lastCheckerCoord, setLastCheckerCoord] = useState(100); //coordinates of last checker coordinates
     const [isWinner, setIsWinner] = useState(""); // "" if no winner, "r" if red won, "b" if black won
 
     //changing to horizontal/vertical view dependent on game style (vs. Human OR vs. Computer)
@@ -84,27 +83,27 @@ function Board(props)
     }
 
 
-        // only used for development purposes
+    // only used for development purposes
     function toDisplay()
     {
-    let str = "";
-    for (let i = 0; i < allCheckers.length; i++)
-    {
-        if (allCheckers[i].isRed)
+        let str = "";
+        for (let i = 0; i < allCheckers.length; i++)
         {
-            str = str + "| R";
+            if (allCheckers[i].isRed)
+            {
+                str = str + "| R";
+            }
+            else
+            {
+                str = str + "| B";   
+            }
+            if (allCheckers[i].isKing)
+            {
+                str = str + "K";
+            }
+            str = str + allCheckers[i].coordinate;
         }
-        else
-        {
-            str = str + "| B";   
-        }
-        if (allCheckers[i].isKing)
-        {
-            str = str + "K";
-        }
-        str = str + allCheckers[i].coordinate;
-    }
-    return str;
+        return str;
     }
 
     let turnColor;
@@ -126,6 +125,7 @@ function Board(props)
         margin: "0 auto",
         color: "white",
         marginBottom: "5px",
+        marginTop: "5px",
         padding: "5px"
     }
      
@@ -146,14 +146,14 @@ function Board(props)
         }
         else
         {
-                if(isRedTurn)
-                {
+            if(isRedTurn)
+            {
                 return "Red's turn";
-                }
-                else
-                {
+            }
+            else
+            {
                 return "Black's turn"; 
-                }
+            }
         }
      }
 
@@ -165,18 +165,18 @@ function Board(props)
      let conditionalButton = "";
      if(!props.vsC)
      {
-        conditionalButton = <h3 onClick={handleSkipClick} style={{backgroundColor: "blue", margin: "10px", padding: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}>Skip Turn</h3>;     
+        conditionalButton = <h3 onClick={handleSkipClick} style={{backgroundColor: "blue", margin: "10px", padding: "5px", paddingTop: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}>Skip Turn</h3>;     
      }
-
-
+     /* put in return, for testing purposes
+        <small>{toDisplay()}</small>
+        <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>
+    */
     return (
         <div style={{margin: "auto"}}>
-                <small>{toDisplay()}</small>
-            <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>
-            <div style={{display: "inline-flex", width: "500px", backgroundColor: "orange"}}>
-                <img src={escape} onClick={handleEscape} style={{backgroundColor: "black", padding: "5px", borderRadius: "10px"}} width="30px" height="30px"/>
+            <div style={{margin: "5 auto", display: "inline-flex", backgroundColor: "lightblue", borderRadius: "20px", padding: "5px", marginTop: "20px", marginBottom: "20px",}}>
+                <img src={escape} onClick={handleEscape} style={{backgroundColor: "black", padding: "5px", borderRadius: "10px", margin: "10px"}} width="30px" height="30px"/>
+                <h3 style={{marginLeft: "10px", marginRight: "10px"}}>Mode: {props.level}</h3>
                 <h2 style={turnStyle}>{setGameSign()}</h2>
-                <h3 >Mode: {props.level}</h3>
                 {conditionalButton}
             </div>
         <div style={styles} id='board'>    
