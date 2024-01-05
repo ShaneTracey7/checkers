@@ -69,9 +69,7 @@ function Board(props)
         coordinates: checkerCoordinates, 
         setCoordinates: setCheckerCoordinates, 
         color: isRed, 
-        setColor: setIsRed,
-        lastCoord: lastCheckerCoord, //idk if i need these
-        setLastCoord: setLastCheckerCoord, //idk if i need these
+        setColor: setIsRed
     };
 
     const gameData = {
@@ -81,7 +79,8 @@ function Board(props)
         setWinner: setIsWinner,
         turn: isRedTurn,
         setTurn: setIsRedTurn,
-        vsC: props.vsC
+        vsC: props.vsC,
+        level: props.level
     }
 
 
@@ -158,14 +157,27 @@ function Board(props)
         }
      }
 
+     function handleSkipClick()
+     {
+        setIsRedTurn(!isRedTurn);
+     }
+
+     let conditionalButton = "";
+     if(!props.vsC)
+     {
+        conditionalButton = <h3 onClick={handleSkipClick} style={{backgroundColor: "blue", margin: "10px", padding: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}>Skip Turn</h3>;     
+     }
+
 
     return (
-        <div style={{margin: "0 auto"}}>
+        <div style={{margin: "auto"}}>
                 <small>{toDisplay()}</small>
             <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>
-            <div style={{display: "inline-flex", width: "400px", backgroundColor: "orange"}}>
+            <div style={{display: "inline-flex", width: "500px", backgroundColor: "orange"}}>
                 <img src={escape} onClick={handleEscape} style={{backgroundColor: "black", padding: "5px", borderRadius: "10px"}} width="30px" height="30px"/>
-            <h2 style={turnStyle}>{setGameSign()}</h2>
+                <h2 style={turnStyle}>{setGameSign()}</h2>
+                <h3 >Mode: {props.level}</h3>
+                {conditionalButton}
             </div>
         <div style={styles} id='board'>    
         <div className='row'>

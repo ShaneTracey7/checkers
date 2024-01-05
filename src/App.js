@@ -8,14 +8,15 @@ function App() {
 
 const [showBoard, setShowBoard] = useState(false);
 const [vsComputer, setVsComputer] = useState(false); //gamestyle is either vs Computer or vs Human
+const [level, setLevel] = useState("2-Player"); //gamestyle is either vs Computer or vs Human
 let display;
 if (showBoard)
 {
-  display = <Board vsC={vsComputer} showB={setShowBoard}/>;
+  display = <Board vsC={vsComputer} showB={setShowBoard} level={level}/>;
 }
 else
 {
-  display = <Menu vsCF={setVsComputer} showB={setShowBoard}/>;
+  display = <Menu vsCF={setVsComputer} showB={setShowBoard} setLevel={setLevel}/>;
 }
 
   return (

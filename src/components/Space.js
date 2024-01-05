@@ -3,6 +3,7 @@ import whiteSpace from '../pics/white-space.png';
 import blackSpace from '../pics/black-space.png';
 import styles from '../styles.css';
 import Checker from './Checker';
+import { getDefaultNormalizer } from '@testing-library/react';
 
 function Space(props)
 {
@@ -17,7 +18,6 @@ let isCheckerSelectedSup = isCheckerSelectedF();
 let isRed = isRedF(coordinates);
 let isEmpty = isEmptyF(coordinates);
 let isKing = isKingF(coordinates);
-//let isLast = isLastF(coordinates);
 
 //tester function
 function isCheckerSelectedF(){
@@ -28,16 +28,6 @@ function isCheckerSelectedF(){
     }
     return false;
   }
-
-//tester function
-function isLastF(coord){
-      if (props.checkerData.lastCoord == coord)
-      {
-         return true;
-      }
-      return false;
-    }
-
 
 //returns if space is empty
 function isEmptyF(coord){
@@ -144,13 +134,19 @@ function handleClick()
             props.checkerData.setCoordinates(-1);
             setIsCheckerSelected(false);  //checker is not selected on SPACE
             props.isSelectedParentF(false); //checker is not selected on BOARD
-            props.checkerData.setLastCoord(props.checkerData.coordinates); //setting selected checkers last coord
             //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
 
 
             if(props.gameData.vsC)
             {
-                computersTurn(temp);
+                switch(props.gameData.level)
+                {
+                    case "Easy": computersTurnEasy(temp); break;
+                    case "Medium": computersTurnMedium(temp); break;
+                    case "Hard": computersTurnHard(temp); break;
+                    default: /* do nothing */ break;
+                }
+               
                 //checker was never selected, it was chosen. 
                 //space nvr highlighted
                 //spaces only remove their highlight for the checker on them when a new checker moves there with a handlelick
@@ -220,13 +216,20 @@ function handleClick()
                     if(w != "")
                     {
                         props.gameData.setWinner(w);
+                        return;
                     }
 
                     if(props.gameData.vsC)
                     {   
                         if (arr != null)
                         {
-                            computersTurn(arr);
+                            switch(props.gameData.level)
+                            {
+                                case "Easy": computersTurnEasy(arr); break;
+                                case "Medium": computersTurnMedium(arr); break;
+                                case "Hard": computersTurnHard(arr); break;
+                                default: /* do nothing */ break;
+                            }
                         }
                         
                    //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
@@ -299,8 +302,8 @@ function randomize(array) {
     }
   }
 
-//algorithm for the computer's turn 
-    function computersTurn(arr) /* arr =  props.checkerData.arr*/
+    //algorithm for the computer's turn in Easy Mode
+    function computersTurnEasy(arr) /* arr =  props.checkerData.arr*/
     {
     let randomizedCheckerArr = arr;
     randomize(randomizedCheckerArr);
@@ -400,6 +403,244 @@ function randomize(array) {
           }
         }
     }
+
+//algorithm for the computer's turn in Medium Mode
+function computersTurnMedium(arr) /* arr =  props.checkerData.arr*/
+{
+let randomizedCheckerArr = arr;
+randomize(randomizedCheckerArr);
+for (let i = 0; i < randomizedCheckerArr.length; i++)
+    {
+            //find a checker on the board of the right color (default AI is gonna be black)
+      if (randomizedCheckerArr[i].isRed == false)
+      {
+        let checkerCoord = randomizedCheckerArr[i].coordinate;
+        let coords = getCoordinateOptionsComputer(checkerCoord);
+            //find if checker can be moved
+            
+            //randomized 4 num array and assign index to each one
+        let randomizedArr = [0,1,2,3]
+        randomize(randomizedArr);
+
+        for(let i = 0; i < 4; i++)
+        {           
+            switch(randomizedArr[i])
+            {
+            case 0: 
+            {
+                if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
+                {
+                    if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord - 18), true, arr);
+                        return;
+                    }
+                }
+                else if (coords[0] != -1 && isEmptyF(coords[0]))
+                {
+                    moveChecker(checkerCoord,coords[0], false, arr);
+                    return;
+                }
+                
+                break;
+            }
+            case 1: 
+            {
+                if (coords[1] != -1 && isRedF(coords[1]) != null && isRedF(coords[1])) 
+                {
+                    if((checkerCoord - 14) >= 0 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord - 14))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord - 14), true, arr);
+                        return;
+                    }
+                }
+                else if (coords[1] != -1 && isEmptyF(coords[1]))
+                {
+                    moveChecker(checkerCoord,coords[1], false, arr);
+                    return;
+                }
+                
+                break;
+            }
+            case 2: 
+            {
+                if ( coords.length == 4 && coords[2] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                {
+                    if((checkerCoord + 14) <= 63 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord + 14))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord + 14), true, arr);
+                        return;
+                    }
+                }
+                else if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
+                {
+                    moveChecker(checkerCoord,coords[2], false, arr);
+                    return;
+                }
+                
+                break;
+            }
+            case 3: 
+            {
+                if (coords.length == 4 && coords[3] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                {
+                    if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord + 18), true, arr);
+                        return;
+                    }
+                }
+                else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
+                {
+                    moveChecker(checkerCoord,coords[3], false, arr);
+                    return;
+                }
+                
+                break;
+            } 
+            default:{/* do nothing (should nvr happen) */}
+            }
+        }   
+
+      }
+    }
+}
+
+//algorithm for the computer's turn in Hard Mode
+function computersTurnHard(arr) /* arr =  props.checkerData.arr*/
+{
+//check possiblities until, one that ovetakes a checker is reached, or one that becomes a king is reached
+let randomizedCheckerArr = arr;
+randomize(randomizedCheckerArr);
+
+let selectedCheckerData = [-1,-1];
+
+for (let i = 0; i < randomizedCheckerArr.length; i++)
+    {
+            //find a checker on the board of the right color (default AI is gonna be black)
+      if (randomizedCheckerArr[i].isRed == false)
+      {
+        let checkerCoord = randomizedCheckerArr[i].coordinate;
+        let coords = getCoordinateOptionsComputer(checkerCoord);
+            //find if checker can be moved
+            
+            //randomized 4 num array and assign index to each one
+        let randomizedArr = [0,1,2,3]
+        randomize(randomizedArr);
+
+        for(let i = 0; i < 4; i++)
+        {           
+            switch(randomizedArr[i])
+            {
+            case 0: 
+            {
+                if (coords[0] != -1 && isRedF(coords[0]) != null && isRedF(coords[0])) 
+                {
+                    if((checkerCoord - 18) >= 0 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord - 18))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord - 18), true, arr);
+                        return;
+                    }
+                }
+
+                else if (coords[0] != -1 && isEmptyF(coords[0]))
+                {
+                    if(coords[0] <= 7 && !(randomizedCheckerArr[i].isKing))
+                    {
+                        selectedCheckerData = [checkerCoord, coords[0]];
+                    }
+                    else if (selectedCheckerData[0] == -1)
+                    {
+                        selectedCheckerData = [checkerCoord, coords[0]];
+                        
+                    }
+                }
+                
+                break;
+            }
+            case 1: 
+            {
+                if (coords[1] != -1 && isRedF(coords[1]) != null && isRedF(coords[1])) 
+                {
+                    if((checkerCoord - 14) >= 0 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord - 14))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord - 14), true, arr);
+                        return;
+                    }
+                }
+    
+                else if (coords[1] != -1 && isEmptyF(coords[1]))
+                {
+                    if(coords[0] <= 7 && !(randomizedCheckerArr[i].isKing))
+                    {
+                        selectedCheckerData = [checkerCoord, coords[1]];
+                    }
+                    else if (selectedCheckerData[0] == -1)
+                    {
+                        selectedCheckerData = [checkerCoord, coords[1]];
+                        
+                    }
+                }
+                
+                break;
+            }
+            case 2: 
+            {
+                if ( coords.length == 4 && coords[2] != -1 && isRedF(coords[2]) != null && isRedF(coords[2]))
+                {
+                    if((checkerCoord + 14) <= 63 && (checkerCoord - 1) % 8 != 0 && isEmptyF(checkerCoord + 14))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord + 14), true, arr);
+                        return;
+                    }
+                }
+                else if (coords.length == 4 && coords[2] != -1 && isEmptyF(coords[2]))
+                {
+                    if (selectedCheckerData[0] == -1)
+                    {
+                        selectedCheckerData = [checkerCoord, coords[2]];
+                        
+                    }
+                }
+                
+                break;
+            }
+            case 3: 
+            {
+                if (coords.length == 4 && coords[3] != -1 && isRedF(coords[3]) != null && isRedF(coords[3]))
+                {
+                    if((checkerCoord + 18) <= 63 && (checkerCoord - 6) % 8 != 0 && isEmptyF(checkerCoord + 18))
+                    {
+                        moveChecker(checkerCoord,(checkerCoord + 18), true, arr);
+                        return;
+                    }
+                }
+                else if (coords.length == 4 && coords[3] != -1 && isEmptyF(coords[3]))
+                {
+                    if (selectedCheckerData[0] == -1)
+                    {
+                        selectedCheckerData = [checkerCoord, coords[3]];
+                        
+                    }
+                }
+                
+                break;
+            } 
+            default:{/* do nothing (should nvr happen) */}
+            }
+        }   
+
+      }
+    }
+    if(selectedCheckerData[0] == -1) //not possible move for computer
+    {
+        return;
+    }
+    else
+    {
+        moveChecker(selectedCheckerData[0],selectedCheckerData[1], false, arr);
+    }
+}
     
 //moves checker to new space and removes captured checker from board
 function captureChecker()
@@ -455,7 +696,6 @@ let checkerStr = "";
 function getCoordinateOptionsComputer(coord)
 {
     const c = coord;
-    let factor1, factor2;
 
     if (isKingF(c))
     {
@@ -463,22 +703,22 @@ function getCoordinateOptionsComputer(coord)
         {
             if(c == 63)
             {
-                return [54,-1];
+                return [54,-1,-1,-1];
             }
             else
             {
-                return [c - 9,c - 7];
+                return [c - 9,c - 7,-1,-1];
             }
         }
         else if (c <= 7)
         {   
             if(c == 0)
             {
-                return [-1,9];
+                return [-1,-1,-1,9];
             }
             else
             {
-                return [c + 7,c + 9];
+                return [-1,-1, c + 7,c + 9];
             }
         }
         else 
@@ -500,28 +740,21 @@ function getCoordinateOptionsComputer(coord)
     }
     else // not king
     {
-        if (c <= 7)
-        {
-            //do nothing
-            return [-1,-1];
-        }
-        factor1 = -7;
-        factor2 = -9;
-        }
     
         if (c == 0 || c == 16 || c ==32 || c == 48) //left column of board
         {
-            return [-1, c + (factor1)];
+            return [-1, c - 7];
         }
-        else if(c == 15 || c == 31|| c == 47 || c == 63)
+        else if(c == 15 || c == 31|| c == 47 || c == 63) //right column of board
         {           
-            return [c + (factor2), -1];
+            return [c - 9, -1];
         }
         else
         {
-            return [c + (factor2),c + (factor1)];
+            return [c - 9,c - 7];
         }
     }
+}
 
 
 //returns all possible locations a checker can move to (without overtaking a checker)
