@@ -3,31 +3,17 @@ import whiteSpace from '../pics/white-space.png';
 import blackSpace from '../pics/black-space.png';
 import styles from '../styles.css';
 import Checker from './Checker';
-import { getDefaultNormalizer } from '@testing-library/react';
 
 function Space(props)
 {
 
 const [isHover, setIsHover] = useState(false); //boolean variable: true if player can move checker to space that is hovered over, false if player can't
-const coordinates = props.coordinates; //0 TO 63 
+const coordinates = props.coordinates; //numberical value: 0 TO 63, corresponding to spaces of the checker board
 const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is the checker on the SPACE selected
 
-//use the props.checkerData.coordinates value if the value is within the range, as the condition for isCheckerSelected
-let isCheckerSelectedSup = isCheckerSelectedF();
-
-let isRed = isRedF(coordinates);
-let isEmpty = isEmptyF(coordinates);
-let isKing = isKingF(coordinates);
-
-//tester function
-function isCheckerSelectedF(){
-    let coord = props.checkerData.coordinates; //selected checker
-    if (coord >= 0 && coord <= 63)
-    {
-       return true;
-    }
-    return false;
-  }
+let isEmpty = isEmptyF(coordinates); //is SPACE empty
+let isRed = isRedF(coordinates); //is checker on SPACE red
+let isKing = isKingF(coordinates); //is checker on SPACE a king
 
 //returns if space is empty
 function isEmptyF(coord){
@@ -96,15 +82,15 @@ function isKingF(coord){
     return false;
 }
 
-//function that moves checker and performs required operations to state, when checker is moved, if checker is satisfies requiremnts.
+//function that moves checker and performs required operations to state, when checker is moved, if checker is satisfies requiremnts
 function handleClick()
 {
-    if (isEmpty == true && props.isWhite && props.isSelectedParentV /*&& isRed == props.checkerData.turn*/) 
+    if (isEmpty == true && props.isWhite && props.isSelectedParentV) 
     { 
-        let coords = getCoordinateOptions();
+        let coords = getCoordinateOptions(); //gets all potential spaces checker can move, without ovetaking a checker
         if(coords[0] == coordinates || coords[1] == coordinates || coords.length == 4 && (coords[2] == coordinates || coords[3] == coordinates))
         {
-            //change show new location checker got moved to
+            //update new location checker got moved to within checker array
             let temp = props.gameData.arr;
             let index = temp.findIndex((obj) => obj.coordinate == props.checkerData.coordinates);
             temp[index].coordinate = coordinates;
@@ -126,18 +112,13 @@ function handleClick()
             }
             //set array with updated info
             props.gameData.setArr(temp);
-
-            //switches turn
-           // props.checkerData.setTurn(!props.checkerData.turn);
             
             setIsHover(false); // space is not highlighted
-            props.checkerData.setCoordinates(-1);
+            props.checkerData.setCoordinates(-1); //set for no selected checker 
             setIsCheckerSelected(false);  //checker is not selected on SPACE
             props.isSelectedParentF(false); //checker is not selected on BOARD
-            //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
-
-
-            if(props.gameData.vsC)
+       
+            if(props.gameData.vsC) //is vs.Computer game mode
             {
                 switch(props.gameData.level)
                 {
@@ -146,20 +127,15 @@ function handleClick()
                     case "Hard": computersTurnHard(temp); break;
                     default: /* do nothing */ break;
                 }
-               
-                //checker was never selected, it was chosen. 
-                //space nvr highlighted
-                //spaces only remove their highlight for the checker on them when a new checker moves there with a handlelick
             }
-            else
+            else //is vs.Human(2-player) game mode
             {
-                    //switches turn
+                //switches turn
                 props.gameData.setTurn(!props.gameData.turn);
             }
-
             return;
         }
-
+        
         if (!(isEmptyF(coords[0])) || !(isEmptyF(coords[1])) ||  coords.length == 4 && ( !(isEmptyF(coords[2])) || !(isEmptyF(coords[3]))))
         {
                 //find the 'skip' coordinate (the one 2 rows away from where the checker currently is)
@@ -199,18 +175,16 @@ function handleClick()
                 }
                 default: skipCoordinate = 0; return;
             }
-                //check color (find a way to get this info)
+            //if a checker can overtake an opponents checker
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
                 {   
-
                     let arr = captureChecker(); //equals null or temp arr
             
                     setIsHover(false); // space is not highlighted
-                    props.checkerData.setCoordinates(-1);
+                    props.checkerData.setCoordinates(-1); //set for no selected checker 
                     setIsCheckerSelected(false);  //checker is not selected on SPACE
                     props.isSelectedParentF(false); //checker is not selected on BOARD
-                    //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
-
+                
                     //check if it was a winning move
                     let w = isWinnerF(arr);
                     if(w != "")
@@ -219,7 +193,7 @@ function handleClick()
                         return;
                     }
 
-                    if(props.gameData.vsC)
+                    if(props.gameData.vsC) //is vs.Computer game mode
                     {   
                         if (arr != null)
                         {
@@ -232,9 +206,8 @@ function handleClick()
                             }
                         }
                         
-                   //props.checkerData.setCoordinates(coordinates); //setting checker coordinates
                     }
-                    else
+                    else //is vs.Human(2-player) game mode
                     {
                         //switches turn
                         props.gameData.setTurn(!props.gameData.turn);
@@ -246,12 +219,11 @@ function handleClick()
     }
 }
 
-
 //called within computersTurn function, it updates all the data and moves the checker
 function moveChecker(currentCoord, destinationCoord, isCapture, arr)
 {
-    //change show new location checker got moved to
-    let temp = arr; //props.checkerData.arr;
+    //update new location checker got moved to within checker array
+    let temp = arr; 
     let index = temp.findIndex((obj) => obj.coordinate == currentCoord);
     temp[index].coordinate = destinationCoord;
     
@@ -288,10 +260,7 @@ function moveChecker(currentCoord, destinationCoord, isCapture, arr)
     }
 
     //set array with updated info
-    props.gameData.setArr(temp);
-
-    //props.checkerData.setCoordinates(destinationCoord); //setting checker coordinates
-    
+    props.gameData.setArr(temp);  
 }
 
 //used to randomize order of elements in array (mainly used to randomize checker moves)
@@ -303,7 +272,7 @@ function randomize(array) {
   }
 
     //algorithm for the computer's turn in Easy Mode
-    function computersTurnEasy(arr) /* arr =  props.checkerData.arr*/
+    function computersTurnEasy(arr) 
     {
     let randomizedCheckerArr = arr;
     randomize(randomizedCheckerArr);
@@ -314,14 +283,15 @@ function randomize(array) {
           {
             let checkerCoord = randomizedCheckerArr[i].coordinate;
             let coords = getCoordinateOptionsComputer(checkerCoord);
-                //find if checker can be moved
+                
                 
                 //randomized 4 num array and assign index to each one
             let randomizedArr = [0,1,2,3]
             randomize(randomizedArr);
 
             for(let i = 0; i < 4; i++)
-            {           
+            {          
+                //find if checker can be moved 
                 switch(randomizedArr[i])
                 {
                 case 0: 
@@ -406,7 +376,7 @@ function randomize(array) {
     }
 
 //algorithm for the computer's turn in Medium Mode
-function computersTurnMedium(arr) /* arr =  props.checkerData.arr*/
+function computersTurnMedium(arr)
 {
 let randomizedCheckerArr = arr;
 randomize(randomizedCheckerArr);
@@ -417,14 +387,15 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
       {
         let checkerCoord = randomizedCheckerArr[i].coordinate;
         let coords = getCoordinateOptionsComputer(checkerCoord);
-            //find if checker can be moved
+            
             
             //randomized 4 num array and assign index to each one
         let randomizedArr = [0,1,2,3]
         randomize(randomizedArr);
 
         for(let i = 0; i < 4; i++)
-        {           
+        {      
+            //find if checker can be moved     
             switch(randomizedArr[i])
             {
             case 0: 
@@ -508,7 +479,7 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
 }
 
 //algorithm for the computer's turn in Hard Mode
-function computersTurnHard(arr) /* arr =  props.checkerData.arr*/
+function computersTurnHard(arr)
 {
 //check possiblities until, one that ovetakes a checker is reached, or one that becomes a king is reached
 let randomizedCheckerArr = arr;
@@ -523,7 +494,7 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
       {
         let checkerCoord = randomizedCheckerArr[i].coordinate;
         let coords = getCoordinateOptionsComputer(checkerCoord);
-            //find if checker can be moved
+            
             
             //randomized 4 num array and assign index to each one
         let randomizedArr = [0,1,2,3]
@@ -531,6 +502,7 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
 
         for(let i = 0; i < 4; i++)
         {           
+            //find if checker can be moved
             switch(randomizedArr[i])
             {
             case 0: 
@@ -637,7 +609,7 @@ for (let i = 0; i < randomizedCheckerArr.length; i++)
     {
         return;
     }
-    else
+    else //didn't find a checker that could overtake the human players
     {
         moveChecker(selectedCheckerData[0],selectedCheckerData[1], false, arr);
     }
@@ -693,7 +665,7 @@ function captureChecker()
 let checkerStr = "";
 
 
-//returns all possible locations a checker can move to (without overtaking a checker)
+//returns all possible locations a checker can move to (without overtaking a checker) (for computer moves)
 function getCoordinateOptionsComputer(coord)
 {
     const c = coord;
@@ -758,7 +730,7 @@ function getCoordinateOptionsComputer(coord)
 }
 
 
-//returns all possible locations a checker can move to (without overtaking a checker)
+//returns all possible locations a checker can move to (without overtaking a checker) (for human moves)
 function getCoordinateOptions()
 {
     const c = props.checkerData.coordinates; //selected checker
@@ -845,7 +817,7 @@ function getCoordinateOptions()
 //highlights all spaces the selected checker can move to 
 function handleMouseEnter()
 {
-    if (isEmpty && props.isWhite /*&& isRed == props.checkerData.turn*/)  
+    if (isEmpty && props.isWhite)  
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates ||coords[1] == coordinates || coords.length == 4 && (coords[2] == coordinates || coords[3] == coordinates) )
@@ -894,7 +866,7 @@ function handleMouseEnter()
                 default: skipCoordinate = 0; return;
             }
 
-                //check color (find a way to get this info)
+                ////if a checker can overtake an opponents checker
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
             {
                 setIsHover(true);
@@ -907,7 +879,7 @@ function handleMouseEnter()
 //highlights all spaces the selected checker can move to 
 function handleMouseLeave()
 {
-    if (isEmpty && props.isWhite /*&& isRed == props.checkerData.turn*/)  
+    if (isEmpty && props.isWhite)  
     { 
         let coords = getCoordinateOptions();
         if(coords[0] == coordinates ||coords[1] == coordinates || coords.length == 4 && (coords[2] == coordinates || coords[3] == coordinates) )
@@ -955,7 +927,7 @@ function handleMouseLeave()
                 }
                 default: skipCoordinate = 0; return;
             }
-            
+            //if a checker can overtake an opponents checker
             if (skipCoordinate != 0 && isRedF(skipCoordinate) != null && isRedF(skipCoordinate) != props.checkerData.color) //if both checkers are different colors
              {
                  setIsHover(false);
@@ -964,17 +936,17 @@ function handleMouseLeave()
         }
     }
 }
-
-let bg = ''; //border for space
+//adjust style of space if selected or not, and if white or black
 let image;
-if (props.isWhite)
+if (props.isWhite) //SPACE is white
     {
         image = whiteSpace;
     }
-    else
+    else //SPACE is black
     {
         image = blackSpace;
     }
+
 let sty;
 if (isHover && props.isSelectedParentV)
 {
@@ -987,14 +959,14 @@ if (isHover && props.isSelectedParentV)
 }
 else
 {
-    if (props.isWhite)
+    if (props.isWhite) //SPACE is white
     {
         const s2 = {
            border: "3px solid white",
           };
           sty = s2;
     }
-    else
+    else //SPACE is black
     {
         const s3 = {
            border: "3px solid black",
@@ -1003,18 +975,15 @@ else
     }
 }
 
-
-if (isEmpty)
+if (isEmpty) //SPACE is empty
 {
-    //checkerStr = "";
-    //props.checkerData.setCoordinates(-1);
+    //Do nothing
 }
-else
+else //SPACE isn't empty
 {
     checkerStr = <Checker gameData={props.gameData} coordinates={props.coordinates} checkerData={props.checkerData} isSelectedParentV={props.isSelectedParentV} isSelectedParentF= {props.isSelectedParentF} onBoard={true} isSelectedF={setIsCheckerSelected} isSelectedV={isCheckerSelected} isRed={isRed} isKing={isKing}/>;
 }
-//<img style={{sty}}  onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />
-//onLoad={handleLoad}
+
 return (
 <div style={styles} className='container'>
     <img style={sty} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} />

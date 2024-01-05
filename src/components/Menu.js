@@ -5,17 +5,12 @@ import person from '../pics/person-icon.png';
 
 function Menu(props)
 {
+const [color, setColor] = useState("blue"); //used to change color of vs.Computer button
+const [vsComputedSelected, setVsComputerSelected] = useState(false); //is vs.Computer button clicked or not
 
-    //just to test things work
-const [color, setColor] = useState("blue");
-const [color2, setColor2] = useState("red");
-const [vsComputedSelected, setVsComputerSelected] = useState(false);
-
+//on click of vs.Computer mode, changes the state and colour of the button
 function handleClickComputer()
 {
-   // props.showB(true);
-  // props.vsCF(true);
-
   setVsComputerSelected(!vsComputedSelected);
 
     if (color == "blue")
@@ -28,6 +23,7 @@ function handleClickComputer()
     }
 }
 
+//set up and display board for vs.Computer on Easy mode
 function handleEasyClick()
 {
     props.showB(true);
@@ -35,6 +31,7 @@ function handleEasyClick()
     props.setLevel("Easy");
 }
 
+//set up and display board for vs.Computer on Medium mode
 function handleMediumClick()
 {
     props.showB(true);
@@ -42,6 +39,7 @@ function handleMediumClick()
     props.setLevel("Medium");
 }
 
+//set up and display board for vs.Computer on Hard mode
 function handleHardClick()
 {
     props.showB(true);
@@ -49,7 +47,7 @@ function handleHardClick()
     props.setLevel("Hard");
 }
 
-
+//set up and display board for vs.Human(2-player)
 function handleClickHuman()
 {
     props.showB(true);
@@ -57,7 +55,7 @@ function handleClickHuman()
     props.setLevel("2-Player");
 }
          
-let display; //variable that holds the html and it conditionally set
+let display; //variable that holds the html and it conditionally set for difficulty levels(Easy,Medium,Hard) for vs.Computer mode OR vs.Human(2-player) mode button
 if (vsComputedSelected)
 {
     display =
@@ -86,7 +84,6 @@ else
     return (
         <div id="menu" style={styles}>
             <h1>Checkers</h1>
-            
             <div style={{marginBottom: "10px", backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
                 <div style={{display: "flex"}} >
                     <img src={person} height={50} width={50}/>
@@ -98,11 +95,8 @@ else
             <div>
                 {display}
             </div>
-        </div>
-            
+        </div>    
     )
-  //  }
-
 }
 
 export default Menu;

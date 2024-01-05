@@ -5,26 +5,27 @@ import escape from '../pics/escape_icon.png';
 
 function Board(props)
 {
-        
+    //selected checker states
     const [isCheckerSelected, setIsCheckerSelected] = useState(false); //is there a selected checker on the BOARD selected
     const [checkerCoordinates, setCheckerCoordinates] = useState(-1); //coordinates for the selected checker 
     const [isRed, setIsRed] = useState(false);  //is the selected checker red
+    
+    //game states
     const [isRedTurn, setIsRedTurn] = useState(true); //is it the red players turn
     const [isWinner, setIsWinner] = useState(""); // "" if no winner, "r" if red won, "b" if black won
 
     //changing to horizontal/vertical view dependent on game style (vs. Human OR vs. Computer)
-    const horizontalCoords =[7,15,23,31,39,47,55,63,6,14,22,30,38,46,54,62,5,13,21,29,37,45,53,61,4,12,20,28,36,44,52,60,3,11,19,27,35,43,51,59,2,10,18,26,34,42,50,58,1,9,17,25,33,41,49,57,0,8,16,24,32,40,48,56];
-    const verticalCoords = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63];
     let coordArr;
     let spaceColour;
-
-    if (props.vsC)
+    const horizontalCoords =[7,15,23,31,39,47,55,63,6,14,22,30,38,46,54,62,5,13,21,29,37,45,53,61,4,12,20,28,36,44,52,60,3,11,19,27,35,43,51,59,2,10,18,26,34,42,50,58,1,9,17,25,33,41,49,57,0,8,16,24,32,40,48,56];
+    const verticalCoords = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63];
+    if (props.vsC) //is vs.Computer mode
     {
         coordArr = verticalCoords;
         spaceColour = [true,false];
 
     }
-    else
+    else    //is vs.Human mode
     {
         coordArr = horizontalCoords;
         spaceColour = [false,true];
@@ -106,6 +107,7 @@ function Board(props)
         return str;
     }
 
+    //conditional styling for the banner that displays what players turn it is (red or black)
     let turnColor;
     let borderColor;
     if (isRedTurn)
@@ -118,6 +120,7 @@ function Board(props)
         turnColor = "black"
         borderColor = "5px solid red"; 
     }
+
     const turnStyle = {
         borderRadius: "10px",
         backgroundColor: turnColor,
@@ -128,12 +131,14 @@ function Board(props)
         marginTop: "5px",
         padding: "5px"
     }
-     
+    
+    //for escape from game to menu button
     function handleEscape()
     {
         props.showB(false);
     }
 
+    //sets the content for the conditional banner (if winner or not, and if red or black player's turn)
     function setGameSign()
     {
         if(isWinner == "r")
@@ -156,17 +161,17 @@ function Board(props)
             }
         }
      }
-
+     //for skip turn button (only used in vs.Human mode (2-player)) 
      function handleSkipClick()
      {
         setIsRedTurn(!isRedTurn);
      }
-
      let conditionalButton = "";
      if(!props.vsC)
      {
         conditionalButton = <h3 onClick={handleSkipClick} style={{backgroundColor: "blue", margin: "10px", padding: "5px", paddingTop: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}>Skip Turn</h3>;     
      }
+
      /* put in return, for testing purposes
         <small>{toDisplay()}</small>
         <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>

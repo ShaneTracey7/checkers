@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import redChecker from '../pics/red-checker.png';
 import blackChecker from '../pics/black-checker.png';
 import redKingChecker from '../pics/red-king-checker.png';
@@ -6,12 +6,12 @@ import blackKingChecker from '../pics/black-king-checker.png';
 
 function Checker(props)
 {
-    
+    //sets checker is not selected, when there is no checker selected on the board
     if(props.checkerData.coordinates == -1)
     {
         props.isSelectedF(false);
     }
-
+    //for when the user clicks a checker, either results in a highlight or not, depending on the turn and updates the states accordingly
     function handleClick()
     {
             if (props.isSelectedV) // is checker selected from Space
@@ -46,6 +46,7 @@ function Checker(props)
             }
     }
 
+    //setting image for checker based on color, and if it is a king
     let image;
     if (props.isRed)
     {   
@@ -70,9 +71,9 @@ function Checker(props)
         }
     }
 
+    //setting highlight/shadow color dependant on if the checher is selected
     let shadowColor = props.isSelectedV && props.checkerData.coordinates != -1 ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
     const borderStyle = {
-        //border: "3px solid blue",
         marginTop: "3px",
         marginLeft: "3px",
         borderRadius: "30px",
@@ -80,11 +81,8 @@ function Checker(props)
       };
 
     return (
-            <img style={borderStyle} onClick={handleClick} src={image} height={50} width={50}/>
-            
+            <img style={borderStyle} onClick={handleClick} src={image} height={50} width={50}/>       
     )
-  //  }
-
 }
 
 export default Checker;
