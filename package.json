@@ -2,7 +2,6 @@
   "name": "reacttestapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ShaneTracey7.github.io/my-app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -39,4 +38,5 @@
       "last 1 safari version"
     ]
   }
+  "homepage": "https://ShaneTracey7.github.io/my-app"
 }
