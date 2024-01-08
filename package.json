@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ShaneTracey7.github.io/my-app",
+  "homepage": "https://ShaneTracey7.github.io/reacttestapp",
   "name": "reacttestapp",
   "version": "0.1.0",
   "private": true,
@@ -40,5 +40,4 @@
       "last 1 safari version"
     ]
   }
-  "homepage": "https://ShaneTracey7.github.io/my-app"
 }
