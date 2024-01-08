@@ -5,7 +5,7 @@ import person from '../pics/person-icon.png';
 
 function Menu(props)
 {
-const [color, setColor] = useState("blue"); //used to change color of vs.Computer button
+const [color, setColor] = useState("lightblue"); //used to change color of vs.Computer button
 const [vsComputedSelected, setVsComputerSelected] = useState(false); //is vs.Computer button clicked or not
 
 //on click of vs.Computer mode, changes the state and colour of the button
@@ -13,13 +13,13 @@ function handleClickComputer()
 {
   setVsComputerSelected(!vsComputedSelected);
 
-    if (color == "blue")
+    if (color == "lightblue")
     {
         setColor("green");
     }
     else
     {
-        setColor("blue");
+        setColor("lightblue");
     }
 }
 
@@ -71,7 +71,7 @@ if (vsComputedSelected)
 }
 else
 {
-    display = <div style={{backgroundColor: "red"}} onClick={handleClickHuman} class="menuButton">
+    display = <div style={{backgroundColor: "lightcoral"}} onClick={handleClickHuman} class="menuButton">
     <div style={{display: "flex"}} >
         <img src={person} height={50} width={50}/>
         <h1 style={{margin: "5px"}} >Vs.</h1>
@@ -83,7 +83,8 @@ else
 
     return (
         <div id="menu" style={styles}>
-            <h1>Checkers</h1>
+            <h1 style={{marginBottom: "0px"}}>Checkers</h1>
+            <small style={{marginTop: "0px", marginBottom: "10px"}}>by Shane</small>
             <div style={{marginBottom: "10px", backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
                 <div style={{display: "flex"}} >
                     <img src={person} height={50} width={50}/>

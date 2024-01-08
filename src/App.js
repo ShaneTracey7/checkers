@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 
 function App() {
 
-const [showBoard, setShowBoard] = useState(false);
+const [showBoard, setShowBoard] = useState(false); //if true checker board is displayed, otherwise menu is displayed
 const [vsComputer, setVsComputer] = useState(false); //gamestyle is either vs Computer or vs Human
 const [level, setLevel] = useState("2-Player"); //gamestyle is either vs Computer or vs Human
 let display;
@@ -24,9 +24,6 @@ else
     {display}
     </div>
   );
-
-
-  
 }
 
 export default App;
