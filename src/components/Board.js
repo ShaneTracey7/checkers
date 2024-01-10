@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import Space from './Space.js';
-import styles from '../styles.css';
 import escape from '../pics/escape_icon.png';
+import WinnerAlert from './WinnerAlert.js';
+//import 'bootstrap/dist/css/bootstrap.css';
+import Toast from 'react-bootstrap/Toast';
+import '../styles.scss';
 
 function Board(props)
 {
@@ -141,11 +144,11 @@ function Board(props)
     //sets the content for the conditional banner (if winner or not, and if red or black player's turn)
     function setGameSign()
     {
-        if(isWinner == "r")
+        if(isWinner === "r")
         {
                 return "Red is the Winner!";
         }
-        else if(isWinner == "b")
+        else if(isWinner === "b")
         {
                 return "Black is the Winner!";
         }
@@ -169,23 +172,29 @@ function Board(props)
      let conditionalButton = "";
      if(!props.vsC)
      {
-        conditionalButton = <h3 onClick={handleSkipClick} style={{backgroundColor: "blue", margin: "10px", padding: "5px", paddingTop: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}>Skip Turn</h3>;     
-     }
+        conditionalButton = <h3 id="skipButton" onClick={handleSkipClick} >Skip Turn</h3>;     
+        //style={{backgroundColor: "blue", margin: "10px", padding: "5px", paddingTop: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}
+    }
 
      /* put in return, for testing purposes
         <small>{toDisplay()}</small>
         <p>{checkerData.coordinates} {checkerData.color ? 'Red':'Black'}</p>
+
+
+<WinnerAlert show={isWinner != "" ? true : false}/>
+        
     */
     return (
-        <div style={{margin: "auto"}}>
-            <div style={{margin: "5 auto", display: "inline-flex", backgroundColor: "lightblue", borderRadius: "20px", padding: "5px", marginTop: "20px", marginBottom: "20px",}}>
-                <img src={escape} onClick={handleEscape} style={{backgroundColor: "black", padding: "5px", borderRadius: "10px", margin: "10px"}} width="30px" height="30px"/>
-                <h3 style={{marginLeft: "10px", marginRight: "10px"}}>Mode: {props.level}</h3>
+        <div id="boardAndBanner">
+            <div className='checkerBanner'>
+                <img alt="escape button" src={escape} onClick={handleEscape} width="30px" height="30px"/>
+                <h3>Mode: {props.level}</h3>
                 <h2 style={turnStyle}>{setGameSign()}</h2>
                 {conditionalButton}
             </div>
-        <div style={styles} id='board'>    
-        <div className='row'>
+
+        <div id='board'>    
+        <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[0]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[1]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[2]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
@@ -196,7 +205,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[7]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[8]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[9]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[10]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
@@ -206,7 +215,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[14]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[15]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          </div>
-        <div className='row'>      
+        <div className='checkerRow'>      
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[16]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[17]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[18]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
@@ -217,7 +226,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[23]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[24]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[25]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[26]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
@@ -228,7 +237,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[31]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
                <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[32]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[33]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[34]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
@@ -239,7 +248,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[39]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
                
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[40]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>       
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[41]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[42]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
@@ -250,7 +259,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[47]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
          
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
 
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[48]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[49]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]}/>
@@ -262,7 +271,7 @@ function Board(props)
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[55]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
                
         </div>
-        <div className='row'>
+        <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[56]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />       
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[57]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[58]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />

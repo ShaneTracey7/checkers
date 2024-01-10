@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import styles from '../styles.css';
 import computer from '../pics/computer-icon.png';
 import person from '../pics/person-icon.png';
+import '../styles.scss';
 
 function Menu(props)
 {
@@ -13,9 +13,9 @@ function handleClickComputer()
 {
   setVsComputerSelected(!vsComputedSelected);
 
-    if (color == "lightblue")
+    if (color === "lightblue")
     {
-        setColor("green");
+        setColor("darkgreen");
     }
     else
     {
@@ -59,12 +59,12 @@ let display; //variable that holds the html and it conditionally set for difficu
 if (vsComputedSelected)
 {
     display =
-    <div style= {{margin: "auto"}}>
-        <h2 style= {{marginTop: "10px", marginBottom: "0px"}}>Difficulty</h2>
-        <div style={{display: "inline-flex"}}>
-            <p onClick={handleEasyClick} style={{marginRight: "5px", border: "2px solid black", color: "white", backgroundColor: "darkgreen", paddingTop: "20px", paddingBottom: "20px", paddingLeft: "15px", paddingRight: "15px", borderRadius: "50px"}}>Easy</p>
-            <p onClick={handleMediumClick} style={{marginRight: "5px", border: "2px solid black",color: "white", backgroundColor: "orange", paddingTop: "20px", paddingBottom: "20px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "50px"}}>Medium</p>
-            <p onClick={handleHardClick} style={{border: "2px solid black",color: "white", backgroundColor: "red", paddingTop: "20px", paddingBottom: "20px",paddingLeft: "15px", paddingRight: "15px", borderRadius: "50px"}}>Hard</p>
+    <div id="levelButtons">
+        <h2>Difficulty</h2>
+        <div>
+            <p onClick={handleEasyClick} style={{backgroundColor: "darkgreen"}}>Easy</p>
+            <p onClick={handleMediumClick} style={{ backgroundColor: "orange", paddingLeft: "5px", paddingRight: "5px"}}>Medium</p>
+            <p onClick={handleHardClick} style={{backgroundColor: "red"}}>Hard</p>
         </div>
     </div>
     
@@ -72,30 +72,28 @@ if (vsComputedSelected)
 else
 {
     display = <div style={{backgroundColor: "lightcoral"}} onClick={handleClickHuman} class="menuButton">
-    <div style={{display: "flex"}} >
-        <img src={person} height={50} width={50}/>
+    <div>
+        <img src={person} height={50} width={50} alt="person"/>
         <h1 style={{margin: "5px"}} >Vs.</h1>
-        <img src={person} height={50} width={50}/>
+        <img src={person} height={50} width={50} alt="person"/>
     </div>
-    <caption style={{display: "block", verticalAlign: "top"}} >Play vs. Human</caption>
+    <caption>Play vs. Human</caption>
 </div>;
 }
 
     return (
-        <div id="menu" style={styles}>
-            <h1 style={{marginBottom: "0px"}}>Checkers</h1>
-            <small style={{marginTop: "0px", marginBottom: "10px"}}>by Shane</small>
-            <div style={{marginBottom: "10px", backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
-                <div style={{display: "flex"}} >
-                    <img src={person} height={50} width={50}/>
-                    <h1 style={{margin: "5px"}} >Vs.</h1>
-                    <img src={computer} height={50} width={60}/>
+        <div id="checkerMenu">
+            <h1 id="title">Checkers</h1>
+            <small>by Shane</small>
+            <div style={{backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
+                <div>
+                    <img src={person} height={50} width={50} alt="person"/>
+                    <h1>Vs.</h1>
+                    <img src={computer} height={50} width={60} alt="computer"/>
                 </div>
-                <caption style={{display: "block", verticalAlign: "top"}} >Play vs. Computer</caption>
+                <caption>Play vs. Computer</caption>
             </div>
-            <div>
-                {display}
-            </div>
+            {display}
         </div>    
     )
 }

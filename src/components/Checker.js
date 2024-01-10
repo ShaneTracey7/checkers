@@ -4,10 +4,11 @@ import blackChecker from '../pics/black-checker.png';
 import redKingChecker from '../pics/red-king-checker.png';
 import blackKingChecker from '../pics/black-king-checker.png';
 
+import '../styles.scss';
 function Checker(props)
 {
     //sets checker is not selected, when there is no checker selected on the board
-    if(props.checkerData.coordinates == -1)
+    if(props.checkerData.coordinates === -1)
     {
         props.isSelectedF(false);
     }
@@ -31,7 +32,7 @@ function Checker(props)
                 }
                 else
                 {
-                    if (props.gameData.turn == props.isRed)
+                    if (props.gameData.turn === props.isRed)
                     {
                         props.isSelectedParentF(true);
                         props.isSelectedF(true); 
@@ -71,17 +72,11 @@ function Checker(props)
         }
     }
 
-    //setting highlight/shadow color dependant on if the checher is selected
-    let shadowColor = props.isSelectedV && props.checkerData.coordinates != -1 ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
-    const borderStyle = {
-        marginTop: "3px",
-        marginLeft: "3px",
-        borderRadius: "30px",
-        boxShadow: shadowColor
-      };
-
+    //setting highlight/shadow color dependant on if the checker is selected
+    let shadowColor = props.isSelectedV && props.checkerData.coordinates !== -1 ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
+    
     return (
-            <img style={borderStyle} onClick={handleClick} src={image} height={50} width={50}/>       
+            <img alt="checker" id='checker' style={{boxShadow: shadowColor}} onClick={handleClick} src={image} height={50} width={50}/>       
     )
 }
 
