@@ -74,9 +74,9 @@ function Checker(props)
 
     //setting highlight/shadow color dependant on if the checker is selected
     let shadowColor = props.isSelectedV && props.checkerData.coordinates !== -1 ? "1px 1px 8px 1px blue" : "1px 1px 10px 0px black";
-    
+    let dim = (Math.min(props.gameData.size.width,(props.gameData.size.height)/**0.85*/))/12;
     return (
-            <img alt="checker" id='checker' style={{boxShadow: shadowColor}} onClick={handleClick} src={image} height={50} width={50}/>       
+            <img alt="checker" id='checker' style={{boxShadow: shadowColor, width: dim, height: dim}} onClick={handleClick} src={image} /*height={50} width={50}*//>       
     )
 }
 

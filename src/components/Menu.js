@@ -54,44 +54,44 @@ function handleClickHuman()
     props.vsCF(false);
     props.setLevel("2-Player");
 }
-         
+let dim = (Math.min(props.size.width,(props.size.height)/**0.85*/)); 
 let display; //variable that holds the html and it conditionally set for difficulty levels(Easy,Medium,Hard) for vs.Computer mode OR vs.Human(2-player) mode button
 if (vsComputedSelected)
 {
     display =
     <div id="levelButtons">
-        <h2>Difficulty</h2>
+        <h2 style={{fontSize: dim > 400 ? "32px" : (dim > 335 ? "28px" : (dim > 250 ? "20px" : "15px"))}} >Difficulty</h2>
         <div>
-            <p onClick={handleEasyClick} style={{backgroundColor: "darkgreen"}}>Easy</p>
-            <p onClick={handleMediumClick} style={{ backgroundColor: "orange", paddingLeft: "5px", paddingRight: "5px"}}>Medium</p>
-            <p onClick={handleHardClick} style={{backgroundColor: "red"}}>Hard</p>
+            <p style={{backgroundColor: "darkgreen", padding: dim/25, fontSize: dim > 400 ? "18px" : (dim > 335 ? "15px" : (dim > 250 ? "12px" : "8px"))}} onClick={handleEasyClick}>Easy</p>
+            <p onClick={handleMediumClick} style={{backgroundColor: "orange", padding: dim/25, fontSize: dim > 400 ? "18px" : (dim > 335 ? "15px" : (dim > 250 ? "12px" : "8px"))}}>Medium</p>
+            <p onClick={handleHardClick} style={{backgroundColor: "red", padding: dim/25, fontSize: dim > 400 ? "18px" : (dim > 335 ? "15px" : (dim > 250 ? "12px" : "8px"))}}>Hard</p>
         </div>
     </div>
     
 }
 else
 {
-    display = <div style={{backgroundColor: "lightcoral"}} onClick={handleClickHuman} class="menuButton">
+    display = <div style={{backgroundColor: "lightcoral", paddingLeft: "45px", paddingRight: "45px"}} onClick={handleClickHuman} class="menuButton">
     <div>
-        <img src={person} height={50} width={50} alt="person"/>
-        <h1 style={{margin: "5px"}} >Vs.</h1>
-        <img src={person} height={50} width={50} alt="person"/>
+        <img style={{width: dim/10, height: dim/10}} src={person} alt="person"/>
+        <h1 style={{margin: "5px", fontSize: dim > 400 ? "30px" : (dim > 300 ? "22px" : (dim > 200 ? "18px" : "12px"))}} >Vs.</h1>
+        <img style={{width: dim/10, height: dim/10}} src={person} alt="person"/>
     </div>
-    <caption>Play vs. Human</caption>
-</div>;
+    <caption style={{margin: "5px", fontSize: dim > 400 ? "18px" : (dim > 335 ? "15px" : (dim > 250 ? "12px" : "8px"))}}>  Play vs. Human  </caption>
+</div>;                                                                                                                 
 }
 
     return (
-        <div id="checkerMenu">
-            <h1 id="title">Checkers</h1>
-            <small>by Shane</small>
+        <div style={{width: (dim/3)*2}} id="checkerMenu">
+            <h1 style={{fontSize: dim > 400 ? "40px" : (dim > 335 ? "35px" : (dim > 250 ? "28px" : "22px"))}} id="title">Checkers</h1>
+            <small style={{fontSize: dim > 335 ? "12px": "10px"}} >by Shane</small>
             <div style={{backgroundColor: color}} onClick={handleClickComputer} class="menuButton">
                 <div>
-                    <img src={person} height={50} width={50} alt="person"/>
-                    <h1>Vs.</h1>
-                    <img src={computer} height={50} width={60} alt="computer"/>
+                    <img style={{width: dim/10, height: dim/10}} src={person} alt="person"/>
+                    <h1 style={{margin: "5px", fontSize: dim > 400 ? "30px" : (dim > 300 ? "22px" : (dim > 200 ? "18px" : "12px"))}}>Vs.</h1>
+                    <img style={{width: dim/10, height: dim/10}} src={computer} alt="computer"/>
                 </div>
-                <caption>Play vs. Computer</caption>
+                <caption style={{margin: "5px", fontSize: dim > 400 ? "18px" : (dim > 335 ? "15px" : (dim > 250 ? "12px" : "8px"))}} >Play vs. Computer</caption>
             </div>
             {display}
         </div>    

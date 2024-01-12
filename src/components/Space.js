@@ -949,11 +949,14 @@ if (props.isWhite) //SPACE is white
     }
 
 let sty;
+let dim = (Math.min(props.gameData.size.width,(props.gameData.size.height)/**0.85*/))/12;
 if (isHover && props.isSelectedParentV)
 {
     const s1 = {
         border: "3px solid white",
         borderRadius: "100%",
+        width: dim,
+        height: dim, 
          filter: "opacity(80%) invert(70%) sepia(100%) saturate(5000%) hue-rotate(245deg) brightness(150%) contrast(147%) blur(3px)"
       };
       sty = s1;
@@ -964,6 +967,8 @@ else
     {
         const s2 = {
            border: "3px solid white",
+           width: dim,
+           height: dim, 
           };
           sty = s2;
     }
@@ -971,6 +976,8 @@ else
     {
         const s3 = {
            border: "3px solid black",
+           width: dim,
+           height: dim, 
           };
           sty = s3;
     }
@@ -987,7 +994,7 @@ else //SPACE isn't empty
 
 return (
 <div className='spaceContainer'>
-    <img style={sty} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} height= {50} width={50} alt="space"/>
+    <img id="space" style={sty} onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} src={image} /* height= {50} width={50} */ alt="space"/>
     <div className='spaceOverlay'>
         {checkerStr}
         </div>

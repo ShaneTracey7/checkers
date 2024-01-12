@@ -83,7 +83,8 @@ function Board(props)
         turn: isRedTurn,
         setTurn: setIsRedTurn,
         vsC: props.vsC,
-        level: props.level
+        level: props.level,
+        size: props.size
     }
 
 
@@ -110,29 +111,27 @@ function Board(props)
         return str;
     }
 
+    //variable for dynamic sizing
+    let dim = (Math.min(props.size.width,(props.size.height)/**0.85*/));
+
     //conditional styling for the banner that displays what players turn it is (red or black)
     let turnColor;
     let borderColor;
     if (isRedTurn)
     {
         turnColor = "red";
-        borderColor = "5px solid black";
+        borderColor = "2px solid black";
     }
     else
     {
         turnColor = "black"
-        borderColor = "5px solid red"; 
+        borderColor = "2px solid red"; 
     }
 
     const turnStyle = {
-        borderRadius: "10px",
         backgroundColor: turnColor,
         border: borderColor, 
-        margin: "0 auto",
-        color: "white",
-        marginBottom: "5px",
-        marginTop: "5px",
-        padding: "5px"
+        fontSize: dim > 600 ? "25px" : (dim > 450 ? "18px" : (dim > 300 ? "12px" : "8px"))
     }
     
     //for escape from game to menu button
@@ -172,7 +171,7 @@ function Board(props)
      let conditionalButton = "";
      if(!props.vsC)
      {
-        conditionalButton = <h3 id="skipButton" onClick={handleSkipClick} >Skip Turn</h3>;     
+        conditionalButton = <h3 style={{fontSize: dim > 600 ? "25px" : (dim > 450 ? "18px" : (dim > 300 ? "12px" : "8px"))}} id="skipButton" onClick={handleSkipClick} >Skip Turn</h3>;     
         //style={{backgroundColor: "blue", margin: "10px", padding: "5px", paddingTop: "5px", border: "2px solid black", color: "white", borderRadius: "10px"}}
     }
 
@@ -182,18 +181,18 @@ function Board(props)
 
 
 <WinnerAlert show={isWinner != "" ? true : false}/>
-        
+        style={{width: (props.size.width)/2, height: (props.size.height)/2}}
     */
     return (
         <div id="boardAndBanner">
-            <div className='checkerBanner'>
-                <img alt="escape button" src={escape} onClick={handleEscape} width="30px" height="30px"/>
-                <h3>Mode: {props.level}</h3>
+            <div style={{margin: dim > 450 ? "10px auto" : (dim > 250 ? "5px auto" : "3px auto")}} className='checkerBanner'>
+                <img style={{width: dim/15, height: dim/15 }} alt="escape button" src={escape} onClick={handleEscape}/>
+                <h3 style={{fontSize: dim > 600 ? "25px" : (dim > 450 ? "18px" : (dim > 300 ? "12px" : "8px"))}} >Mode: {props.level}</h3>
                 <h2 style={turnStyle}>{setGameSign()}</h2>
                 {conditionalButton}
             </div>
 
-        <div id='board'>    
+        <div style={{border: dim > 450 ? "10px solid burlywood" : (dim > 250 ? "5px solid burlywood" : "3px solid burlywood")}} id='board'>    
         <div className='checkerRow'>
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[0]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[0]} />
                 <Space gameData={gameData} checkerData ={checkerData} coordinates = {coordArr[1]}  isSelectedParentV={isCheckerSelected} isSelectedParentF= {setIsCheckerSelected} isWhite={spaceColour[1]} />
