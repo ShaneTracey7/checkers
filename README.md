@@ -9,7 +9,7 @@ This was made to expand and apply my React.js knowledge. I took an online code a
 
 What it does:
 
-It is a checkers App, if your not familiar with the game, you can find more about it at the following link: https://en.wikipedia.org/wiki/Checkers
+It is a checkers App. I used a responsive app design, therefore you can play on your desktop or on a mobile browser. If you're not familiar with the game, you can find more about it at the following link: https://en.wikipedia.org/wiki/Checkers
 
 
 There are 2 game modes: Human vs. Computer (1-player) and Human vs. Human (2-player).
